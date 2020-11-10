@@ -7,15 +7,12 @@ def f(x):
 
 #utilizamos biseccion para buscar dos semillas de inicio
 def biseccion(a,b):
-    n = 1
-    while (n!=0):
         p = (a + b)/2        
         if f(a) * f(p) < 0:
             b = p
         else:
-            a = p     
-        n = n - 1
-    return p
+            a = p    
+        return p
 
 
 def metodoSecante(a,b,tolerancia,numMaxIteraciones):
