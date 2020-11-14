@@ -9,7 +9,7 @@ archivo = open('pruebaRaices.txt','a')
 
 a = np.float32(input("a: "))
 b = np.float32(input('b: '))
-c = np.float32(input('c: '))
+c = np.float32(input('c: "))
 
 print('\n', file=(archivo))
 print('a=', a, file=(archivo), end='   ')
