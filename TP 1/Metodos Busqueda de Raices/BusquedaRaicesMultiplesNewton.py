@@ -7,7 +7,7 @@ import sympy as sym
 # (Solo para funciones con raices multiples)
 # En el caso que f'(p) != 0, usar metodo de Newton para raices simples
 def f(x):
-    return x**2 - 8*x +16
+    return x**3
 
 def busqueda_raiz_newton(funcion, semilla, error, paso_a_paso=False):
     
@@ -18,10 +18,11 @@ def busqueda_raiz_newton(funcion, semilla, error, paso_a_paso=False):
     iteraciones = 1
     
     while not abs( dato - dato_viejo) <= error:
-         if paso_a_paso:
-             mostrar_informacion(dato, abs(dato-dato_viejo), iteraciones)
-         dato_viejo = dato
-         dato = sucesion.subs(x, dato_viejo)
+        iteraciones +=1
+        if paso_a_paso:
+            mostrar_informacion(dato, abs(dato-dato_viejo), iteraciones)
+        dato_viejo = dato
+        dato = sucesion.subs(x, dato_viejo)
          
      
     return (dato, abs(dato- dato_viejo), iteraciones)
@@ -45,6 +46,6 @@ def mostrar_resultados(resultados):
 x= sym.Symbol('x')
 
 # Si se quiere paso a paso, agregar True como parametro al final
-resultados = busqueda_raiz_newton(f(x), 2,  0.001, True)
+resultados = busqueda_raiz_newton(f(x), 1,  0.0001, True)
 
 mostrar_resultados(resultados)

@@ -17,6 +17,7 @@ def busqueda_raiz_newton(funcion, semilla, error, paso_a_paso=False):
     iteraciones = 1
     
     while not (abs(dato - dato_viejo) <= error):
+        iteraciones+=1
         if paso_a_paso:
              mostrar_informacion(dato, abs(dato-dato_viejo), iteraciones)
         dato_viejo = dato
@@ -42,6 +43,6 @@ def mostrar_resultados(resultados):
 x= sym.Symbol('x')
 
 # Si se quiere paso a paso, agregar True como parametro al final
-resultados = busqueda_raiz_newton(f(x),0.9,  0.001)
+resultados = busqueda_raiz_newton(f(x),0.9,  0.00001,True)
 
 mostrar_resultados(resultados)
