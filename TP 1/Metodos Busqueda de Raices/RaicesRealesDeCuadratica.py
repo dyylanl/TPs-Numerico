@@ -12,10 +12,12 @@ def sgn(b):
         return -1
     else:
         return 1
+    
+tolerancia = 1e-30
 
 discriminante = np.float32(b**2-4*a*c)
 
-if discriminante == 0:
+if np.abs(discriminante) < tolerancia:
     print('\nRaiz doble:',np.float32((-b)/2*a))
     sys.exit()
     
