@@ -72,6 +72,10 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     
     print("\n Usando la cota de error: " + str(cota)+ "\n ")
     
+    print("===========================================" + "\n")
+    print ("\t \t \t BISECCION \n")    
+    print("===========================================" + "\n")
+
     resultadoBiseccion = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion)
     print("El resultado por Bisección es: "+ str(resultadoBiseccion[:3]) + "\n")
     
@@ -83,6 +87,9 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     semillaNewton = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 5)[0]
     semillaAux = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 4)[0] # Solo para secante
     
+ 
+    print ("--------------- SEMILLAS ----------------- \n")    
+
     print("Semilla elegida con 5 iteraciones de biseccion: "+ str(semillaNewton))
     print("Semilla auxiliar elegida con 4 iteraciones de biseccion: "+ str(semillaAux) + "\n")
     
@@ -90,19 +97,26 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     funcionNewton = sym.simplify((-1* (x**3)) + 3*R*(x**2) - (3 * volumenAHallar/ math.pi))
     
     resultadoSecante = secante.busqueda_raiz_secante(funcionNewton, semillaNewton, semillaAux,  cota)
+    print("===========================================" + "\n")
+    print ("\t \t \t SECANTE \n")    
+    print("===========================================" + "\n")  
     print("El resultado por Secante es: "+ str(resultadoSecante) + "\n")
     
     resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
+    print("===========================================" + "\n")
+    print ("\t \t \t NEWTON \n")    
+    print("===========================================" + "\n")    
     print("El resultado por Newton es: "+ str(resultadoNewton[:3]) + "\n")
      
     resultadoNewtonMult = newtonMult.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
+    print("===========================================" + "\n")
+    print ("\t \t \t NEWTON MULTIPLE \n")    
+    print("===========================================" + "\n")   
     print("El resultado por Newton Mult es: "+ str(resultadoNewtonMult[:3]))
     
 x= sym.Symbol('x')
 
-h= sym.Symbol('h')
-
- 
+h= sym.Symbol('h') 
 
 graficarFuncionesYDerivadas()
 
@@ -116,7 +130,7 @@ funcionAltura = sym.simplify((-1* (h**3)) + 3*R*(h**2) - (3 * volumenAHallar/ ma
 
 #graficoAltura = sym.plotting.plot(funcionAltura, (h, 0, 2*R))
 
-print("a) Volumen del tanque lleno al "+ str(porcentajePedido*100) +  "% calculado: " + str(volumenAHallar))
+print("a) Volumen del tanque lleno al "+ str(porcentajePedido*100) +  "% calculado: " + str(volumenAHallar) + "\n")
 print("b) El volumen total del tanque es: " + str(volumenLlenoAPorcentaje(1)))
 
 buscarRaicesConDistintosMetodosYCota(10**(-5))
