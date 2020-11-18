@@ -32,16 +32,17 @@ def volumenLlenoAPorcentaje(porcentaje):
   return volumenDelTanqueDeAgua(2*R) * porcentaje
 
 
-def graficarFuncionesYDerivadas():
+def graficarFuncionesYDerivadas(mostrarLeyenda = False):
     
     funcionVolumenPorcentajeEnSimbolos = sym.simplify((math.pi * (x ** 2)* (3*R-x))/3)
     funcionVolumenPorcentajeDerivada = sym.simplify(sym.diff(funcionVolumenPorcentajeEnSimbolos,x))
     
-    graficoVolumen = sym.plotting.plot(funcionVolumenPorcentajeEnSimbolos, (x, 0, 2*R))
-    graficoDerivada = sym.plotting.plot(funcionVolumenPorcentajeDerivada, (x, 0, 2*R))
+    graficoVolumen = sym.plotting.plot(funcionVolumenPorcentajeEnSimbolos, (x, 0, 2*R), title = "Grafico Volumen y Derivada segun el Radio del Tanque", label = "Funcion Volumen", xlabel = "Radio", ylabel = "Volumen", legend = mostrarLeyenda)
+    graficoDerivada = sym.plotting.plot(funcionVolumenPorcentajeDerivada, (x, 0, 2*R),  line_color = 'r', label = "Derivada de Volumen segun el Radio", legend = mostrarLeyenda)
     graficoVolumen.extend(graficoDerivada)
-    graficoVolumen.extend(sym.plotting.plot(volumenDelTanqueDeAgua(2*R), (x, 0, 2*R)))
-    graficoVolumen.extend(sym.plotting.plot(0, (x, 0, 2*R)))
+    graficoVolumen.extend(sym.plotting.plot(volumenDelTanqueDeAgua(2*R), (x, 0, 2*R), line_color = 'g', label = "Volumen maximo", legend = mostrarLeyenda))
+    graficoVolumen.extend(sym.plotting.plot(0, (x, 0, 2*R), line_color = "Yellow", label = "Derivada Volumen Maximo", legend = mostrarLeyenda))
+    
     
     graficoVolumen.show()
 
@@ -86,7 +87,7 @@ h= sym.Symbol('h')
 
  
 
-#graficarFuncionesYDerivadas()
+graficarFuncionesYDerivadas()
 
 volumenTotalDeAgua = volumenDelTanqueDeAgua(2*R)
 porcentajePedido = porcentajeDeAguaABuscar()
