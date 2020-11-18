@@ -5,8 +5,11 @@ import numpy as np
 def f(x):
     return math.cos(x) -x
 
-def busqueda_raiz(inicio, fin, epsilon, func):
-    N = math.ceil(np.log2((fin-inicio)/epsilon))
+def busqueda_raiz(inicio, fin, epsilon, func, iteraciones = None):
+    N = iteraciones
+    if(iteraciones == None):
+        N = math.ceil(np.log2((fin-inicio)/epsilon))
+        
     #print("Iteraciones: " + str(N))
     resultado = busqueda_raiz_rec(inicio, fin, N, func)
     resultado[2] = N
