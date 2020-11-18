@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import sympy as sym
 
 import BusquedaRaicesBiseccion as biseccion
-#import BusquedaRaicesNewton as newton
+import BusquedaRaicesNewton as newton
 #import BusquedaRaicesMultiplesNewton as newtonMult
 #import BusquedaRaicesPuntoFijo as puntoFijo
 
@@ -61,6 +61,24 @@ def funcionParaPuntoFijo(x):
 def funcionParaBiseccion(x):
     funcionAltura = sym.simplify((-1* (h**3)) + 3*R*(h**2) - (3 * volumenAHallar/ math.pi))
     return funcionAltura.subs(h,x)
+
+
+def buscarRaicesConDistintosMetodosYCota(cota):
+    
+    resultadoBiseccion = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion)
+    print("El resultado por Bisección es: "+ str(resultadoBiseccion))
+    
+    #resultadoPuntoFijo = puntoFijo.busqueda_raiz(0, 2*R, cota, funcionParaPuntoFijo)
+    #print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo))
+    
+    x= sym.Symbol('x')
+    semillaNewton = R
+    funcionNewton = sym.simplify((-1* (x**3)) + 3*R*(x**2) - (3 * volumenAHallar/ math.pi))
+    resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
+    print("El resultado por Newton es: "+ str(resultadoNewton))
+    
+    #resultadoNewtonMult = newtonMult.busqueda_raiz(0, 2*R, 1*10**(-5), funcionParaNewtonMult)
+    #print("El resultado por Newton Mult es: "+ str(resultadoNewtonMult))
     
 x= sym.Symbol('x')
 
@@ -78,22 +96,12 @@ volumenAHallar = volumenLlenoAPorcentaje(porcentajePedido)
 funcionAltura = sym.simplify((-1* (h**3)) + 3*R*(h**2) - (3 * volumenAHallar/ math.pi))
 
 
-graficoAltura = sym.plotting.plot(funcionAltura, (h, 0, 2*R))
+#graficoAltura = sym.plotting.plot(funcionAltura, (h, 0, 2*R))
 
 print("a) Volumen del tanque lleno al "+ str(porcentajePedido*100) +  "% calculado: " + str(volumenAHallar))
 print("b) El volumen total del tanque es: " + str(volumenLlenoAPorcentaje(1)))
 
+buscarRaicesConDistintosMetodosYCota(10**(-5))
 
-resultadoBiseccion = biseccion.busqueda_raiz(0, 2*R, 1*10**(-13), funcionParaBiseccion)
-print("El resultado por Bisección es: "+ str(resultadoBiseccion))
-
-resultadoPuntoFijo = puntoFijo.busqueda_raiz(0, 2*R, 1*10**(-5), funcionParaPuntoFijo)
-print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo))
-
-resultadoPuntoFijo = newton.busqueda_raiz(0, 2*R, 1*10**(-5), funcionParaNewton)
-print("El resultado por Newton es: "+ str(resultadoPuntoFijo))
-
-resultadoPuntoFijo = newtonMult.busqueda_raiz(0, 2*R, 1*10**(-5), funcionParaNewtonMult)
-print("El resultado por Newton Mult es: "+ str(resultadoPuntoFijo))
 
 

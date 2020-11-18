@@ -10,7 +10,7 @@ def f(x):
     return x**2 -1
 
 def busqueda_raiz_newton(funcion, semilla, error, paso_a_paso=False):
-    
+    x= sym.Symbol('x')
     sucesion = sym.simplify( x - (funcion / sym.diff(funcion)) )
     dato_viejo = semilla
     dato = sucesion.subs(x, dato_viejo)
@@ -40,13 +40,4 @@ def mostrar_resultados(resultados):
     print("Error: " + str(resultados[1]))
 
 
-x= sym.Symbol('x')
 
-# Si se quiere paso a paso, agregar True como parametro al final
-resultados = busqueda_raiz_newton(f(x),0.9,  0.00001,True)
-
-mostrar_resultados(resultados)
-
-
-padron = "102110"
-print(padron[-1])
