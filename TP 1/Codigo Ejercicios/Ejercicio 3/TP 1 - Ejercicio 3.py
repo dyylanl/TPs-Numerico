@@ -5,7 +5,7 @@ import sympy as sym
 
 import BusquedaRaicesBiseccion as biseccion
 import BusquedaRaicesNewton as newton
-#import BusquedaRaicesMultiplesNewton as newtonMult
+import BusquedaRaicesMultiplesNewton as newtonMult
 #import BusquedaRaicesPuntoFijo as puntoFijo
 
 
@@ -77,8 +77,8 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
     print("El resultado por Newton es: "+ str(resultadoNewton))
     
-    #resultadoNewtonMult = newtonMult.busqueda_raiz(0, 2*R, 1*10**(-5), funcionParaNewtonMult)
-    #print("El resultado por Newton Mult es: "+ str(resultadoNewtonMult))
+    resultadoNewtonMult = newtonMult.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
+    print("El resultado por Newton Mult es: "+ str(resultadoNewtonMult))
     
 x= sym.Symbol('x')
 

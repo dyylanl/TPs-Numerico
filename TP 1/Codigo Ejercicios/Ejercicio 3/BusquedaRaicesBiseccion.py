@@ -7,7 +7,7 @@ def f(x):
 
 def busqueda_raiz(inicio, fin, epsilon, func):
     N = math.ceil(np.log2((fin-inicio)/epsilon))
-    print("Iteraciones: " + str(N))
+    #print("Iteraciones: " + str(N))
     resultado = busqueda_raiz_rec(inicio, fin, N, func)
     resultado[2] = N
     return resultado
