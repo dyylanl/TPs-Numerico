@@ -91,7 +91,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("El resultado por Secante es: "+ str(resultadoSecante) + "\n")
     
     resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
-    print("El resultado por Newton es: "+ str(resultadoNewton) + "\n")
+    print("El resultado por Newton es: "+ str(resultadoNewton[:3]) + "\n")
     
     resultadoNewtonMult = newtonMult.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
     print("El resultado por Newton Mult es: "+ str(resultadoNewtonMult))
