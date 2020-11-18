@@ -13,7 +13,7 @@ def sgn(b):
     else:
         return 1
     
-tolerancia = 1e-30
+tolerancia = 1e-38
 
 discriminante = np.float32(b**2-4*a*c)
 
