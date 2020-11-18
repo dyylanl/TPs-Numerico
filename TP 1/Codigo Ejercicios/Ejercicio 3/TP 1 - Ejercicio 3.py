@@ -9,6 +9,8 @@ import BusquedaRaicesMultiplesNewton as newtonMult
 #import BusquedaRaicesPuntoFijo as puntoFijo
 import BusquedaRaicesSecante as secante
 
+import OrdenDeConvergencia as ordenConvegencia
+
 
 R = 4.25
 CANT_DE_INTEGRANTES = 6
@@ -92,9 +94,9 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     
     resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
     print("El resultado por Newton es: "+ str(resultadoNewton[:3]) + "\n")
-    
+     
     resultadoNewtonMult = newtonMult.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
-    print("El resultado por Newton Mult es: "+ str(resultadoNewtonMult))
+    print("El resultado por Newton Mult es: "+ str(resultadoNewtonMult[:3]))
     
 x= sym.Symbol('x')
 
