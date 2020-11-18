@@ -67,6 +67,9 @@ def funcionParaBiseccion(x):
 
 def buscarRaicesConDistintosMetodosYCota(cota):
     
+    
+    print("\n Usando la cota de error: " + str(cota)+ "\n ")
+    
     resultadoBiseccion = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion)
     print("El resultado por Bisección es: "+ str(resultadoBiseccion))
     
