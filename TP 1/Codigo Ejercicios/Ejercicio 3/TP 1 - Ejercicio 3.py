@@ -71,7 +71,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("\n Usando la cota de error: " + str(cota)+ "\n ")
     
     resultadoBiseccion = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion)
-    print("El resultado por Bisección es: "+ str(resultadoBiseccion))
+    print("El resultado por Bisección es: "+ str(resultadoBiseccion[:3]) + "\n")
     
     #resultadoPuntoFijo = puntoFijo.busqueda_raiz(0, 2*R, cota, funcionParaPuntoFijo)
     #print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo))
@@ -82,16 +82,16 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     semillaAux = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 4)[0] # Solo para secante
     
     print("Semilla elegida con 5 iteraciones de biseccion: "+ str(semillaNewton))
-    print("Semilla auxiliar elegida con 4 iteraciones de biseccion: "+ str(semillaAux))
+    print("Semilla auxiliar elegida con 4 iteraciones de biseccion: "+ str(semillaAux) + "\n")
     
     
     funcionNewton = sym.simplify((-1* (x**3)) + 3*R*(x**2) - (3 * volumenAHallar/ math.pi))
     
     resultadoSecante = secante.busqueda_raiz_secante(funcionNewton, semillaNewton, semillaAux,  cota)
-    print("El resultado por Secante es: "+ str(resultadoSecante))
+    print("El resultado por Secante es: "+ str(resultadoSecante) + "\n")
     
     resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
-    print("El resultado por Newton es: "+ str(resultadoNewton))
+    print("El resultado por Newton es: "+ str(resultadoNewton) + "\n")
     
     resultadoNewtonMult = newtonMult.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
     print("El resultado por Newton Mult es: "+ str(resultadoNewtonMult))
