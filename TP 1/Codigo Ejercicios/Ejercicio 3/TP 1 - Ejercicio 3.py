@@ -73,7 +73,8 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     #print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo))
     
     x= sym.Symbol('x')
-    semillaNewton = R
+    semillaNewton = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 5)[0]
+    print("Semilla elegida con 5 iteraciones de biseccion: "+ str(semillaNewton))
     funcionNewton = sym.simplify((-1* (x**3)) + 3*R*(x**2) - (3 * volumenAHallar/ math.pi))
     resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
     print("El resultado por Newton es: "+ str(resultadoNewton))
