@@ -7,6 +7,7 @@ import BusquedaRaicesBiseccion as biseccion
 import BusquedaRaicesNewton as newton
 import BusquedaRaicesMultiplesNewton as newtonMult
 #import BusquedaRaicesPuntoFijo as puntoFijo
+import BusquedaRaicesSecante as secante
 
 
 R = 4.25
@@ -73,9 +74,19 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     #print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo))
     
     x= sym.Symbol('x')
+    y= sym.Symbol('y')
     semillaNewton = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 5)[0]
+    semillaAux = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 4)[0] # Solo para secante
+    
     print("Semilla elegida con 5 iteraciones de biseccion: "+ str(semillaNewton))
+    print("Semilla auxiliar elegida con 4 iteraciones de biseccion: "+ str(semillaAux))
+    
+    
     funcionNewton = sym.simplify((-1* (x**3)) + 3*R*(x**2) - (3 * volumenAHallar/ math.pi))
+    
+    resultadoSecante = secante.busqueda_raiz_secante(funcionNewton, semillaNewton, semillaAux,  cota)
+    print("El resultado por Secante es: "+ str(resultadoSecante))
+    
     resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
     print("El resultado por Newton es: "+ str(resultadoNewton))
     
