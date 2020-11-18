@@ -1,5 +1,6 @@
 import math
 import sympy as sym
+import numpy as np
 
 
 
@@ -16,16 +17,21 @@ def busqueda_raiz_newton(funcion, semilla, error, paso_a_paso=False):
     dato_viejo = semilla
     dato = sucesion.subs(x, dato_viejo)
     iteraciones = 1
+    #si hago más de 50 iteraciones no va a funcionar esto
+    historia = np.zeros((50, 2))
     
     while not abs( dato - dato_viejo) <= error:
+        historia[iteraciones - 1] = (iteraciones, dato)
         iteraciones +=1
         if paso_a_paso:
             mostrar_informacion(dato, abs(dato-dato_viejo), iteraciones)
         dato_viejo = dato
         dato = sucesion.subs(x, dato_viejo)
          
-     
-    return (dato, abs(dato- dato_viejo), iteraciones)
+    historia[iteraciones - 1] = (iteraciones, dato)
+    historia = historia [:iteraciones]
+    
+    return (dato, abs(dato- dato_viejo), iteraciones, historia)
 
 
 def mostrar_informacion(valor, error, iteracion):
