@@ -1,6 +1,9 @@
 import numpy as np
 import sys
 
+tolerancia = 1e-38
+numMax = 1e+19      # (1e+19)^2= 1e+38, orden de magnitud a partir del cual puedo tener overflow con 32 bits
+
 print('\n Ingrese los valores ax^2 + bx +c:')
 
 a = np.float32(input("a: "))
@@ -12,8 +15,6 @@ def sgn(b):
         return -1
     else:
         return 1
-    
-tolerancia = 1e-38
 
 discriminante = np.float32(b**2-4*a*c)
 
