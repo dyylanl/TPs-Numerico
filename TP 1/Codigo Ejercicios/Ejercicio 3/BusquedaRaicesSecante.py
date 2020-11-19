@@ -1,29 +1,50 @@
 import math
 import sympy as sym
+import numpy as np
 
 
-def busqueda_raiz_secante(funcion, semilla1, semilla2, error, paso_a_paso=False):
+def busqueda_raiz_secante(funcion, semilla1, semilla2, error, paso_a_paso=False, iteracionesForzadas = None):
     x= sym.Symbol('x')
     y= sym.Symbol('y')
     dato_viejo1 = semilla1
     dato_viejo2 = semilla2
-    dato =  dato_viejo1 - (((funcion.subs(x,dato_viejo1)) * (dato_viejo1 - dato_viejo2))/ ((funcion.subs(x, dato_viejo1)) - funcion.subs(x, dato_viejo2) ) )
+    
+    #si tiene mas de 50 iteraciones no va a funcionar
+    historia = np.zeros((50, 2))
+    
     iteraciones = 1
     
-    while not (abs(dato - dato_viejo1) <= error):
-        iteraciones+=1
-        if paso_a_paso:
-             mostrar_informacion(dato, abs(dato-dato_viejo1), iteraciones)
-        dato_viejo2= dato_viejo1
-        dato_viejo1 = dato
-        dato = dato_viejo1 - (((funcion.subs(x,dato_viejo1)) * (dato_viejo1 - dato_viejo2))/ ((funcion.subs(x, dato_viejo1)) - funcion.subs(x, dato_viejo2) ) )
-     
-    return (dato, abs(dato- dato_viejo1), iteraciones)
+    dato =  dato_viejo1 - (((funcion.subs(x,dato_viejo1)) * (dato_viejo1 - dato_viejo2))/ ((funcion.subs(x, dato_viejo1)) - funcion.subs(x, dato_viejo2) ) )
+    if (iteracionesForzadas == None):
+        while not (abs(dato - dato_viejo1) <= error):
+            historia[iteraciones - 1] = (iteraciones, dato)
+            iteraciones+=1
+            if paso_a_paso:
+                mostrar_informacion(dato, abs(dato-dato_viejo1), iteraciones)
+            dato_viejo2= dato_viejo1
+            dato_viejo1 = dato
+            dato = dato_viejo1 - (((funcion.subs(x,dato_viejo1)) * (dato_viejo1 - dato_viejo2))/ ((funcion.subs(x, dato_viejo1)) - funcion.subs(x, dato_viejo2) ))
+    else:
+        
+        while (iteraciones < iteracionesForzadas):
+            historia[iteraciones - 1] = (iteraciones, dato)
+            iteraciones+=1
+            if paso_a_paso:
+                mostrar_informacion(dato, abs(dato-dato_viejo1), iteraciones)           
+            dato_viejo2= dato_viejo1
+            dato_viejo1 = dato
+            dato = dato_viejo1 - (((funcion.subs(x,dato_viejo1)) * (dato_viejo1 - dato_viejo2))/ ((funcion.subs(x, dato_viejo1)) - funcion.subs(x, dato_viejo2) ))
+           
+    mostrar_informacion(dato, abs(dato-dato_viejo1), iteraciones)
+    historia[iteraciones - 1] = (iteraciones, dato)
+    historia = historia[:iteraciones]
+    return (dato, abs(dato- dato_viejo1), iteraciones, historia)
 
 def mostrar_informacion(valor, error, iteracion):
     print("Iteracion: " + str(iteracion))
     print("Valor: "+ str(valor))
-    input("Error actual: "+ str(error))
+    #input("Error actual: "+ str(error))
+    print("Error actual: "+ str(error))
     print("--")
     
 def mostrar_resultados(resultados):
