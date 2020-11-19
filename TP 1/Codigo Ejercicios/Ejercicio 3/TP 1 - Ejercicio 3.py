@@ -64,13 +64,10 @@ def funcionParaBiseccion(x):
     funcionAltura = sym.simplify((-1* (h**3)) + 3*R*(h**2) - (3 * volumenAHallar/ math.pi))
     return funcionAltura.subs(h,x)
 
-def funcionFParaPuntoFijo(x):
-    funcionAltura = sym.simplify((-1* (h**3)) + 3*R*(h**2) - (3 * volumenAHallar/ math.pi))
-    return (funcionAltura.subs(h,x))
 
-def funcionGParaPuntoFijo(x):
+def funcionGParaPuntoFijo(y):
     GdeXParaPuntoFijo = lambda x: ( (( (x**3)/(3*R) ) + (volumenAHallar/(R*math.pi) ))**(1/2))
-    return (GdeXParaPuntoFijo)
+    return (GdeXParaPuntoFijo(y))
 
 def buscarRaicesConDistintosMetodosYCota(cota):
 
@@ -111,8 +108,8 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("Semilla auxiliar elegida con 4 iteraciones de biseccion: "+ str(semillaAux) + "\n")
 
 
-    GdeXParaPuntoFijo = lambda x: ( (( (x**3)/(3*R) ) + (volumenAHallar/(R*math.pi) ))**(1/2))
-    resultadoPuntoFijo = puntoFijo.busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, GdeXParaPuntoFijo, CANT_MAX_DE_ITERACIONES)
+#    GdeXParaPuntoFijo = lambda x: ( (( (x**3)/(3*R) ) + (volumenAHallar/(R*math.pi) ))**(1/2))
+    resultadoPuntoFijo = puntoFijo.busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, funcionGParaPuntoFijo, CANT_MAX_DE_ITERACIONES)
     print("===========================================" + "\n")
     print ("\t \t \t PUNTO FIJO \n")
     print("===========================================" + "\n")
