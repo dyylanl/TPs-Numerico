@@ -24,6 +24,20 @@ if np.abs(discriminante) < tolerancia:
 if discriminante < 0:
     print('\nLas raices no son reales.')
     sys.exit()
+    
+#aca ya habiendo corroborado que discriminante>0, utilizo logica adicional para 
+#salvarme en casos de que pueda ocurrir overflow si los coeficientes son muy grandes
+
+if (np.abs(b) >= numMax or np.abs(4*a*c) >= numMax):    
+    m = max(np.abs(b), np.sqrt(np.abs(4*a*c)))
+    discriminante = (b/m)**2 + (4*a*c)/(m**2)
+    x1 = np.float32(-(b + sgn(b)*m*np.sqrt(discriminante))/(2*a))
+    x2 = np.float32(c/(a*x1))
+    print('\nLas raices son:\n')
+    print('Raiz 1:',x1)
+    print('\nRaiz 2:',x2)
+    sys.exit()
+
 
 
 x1 = np.float32(-(b + sgn(b)*np.sqrt(discriminante))/(2*a))
