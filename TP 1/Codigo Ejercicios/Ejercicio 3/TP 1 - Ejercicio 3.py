@@ -6,7 +6,7 @@ import sympy as sym
 import BusquedaRaicesBiseccion as biseccion
 import BusquedaRaicesNewton as newton
 import BusquedaRaicesMultiplesNewton as newtonMult
-#import BusquedaRaicesPuntoFijo as puntoFijo
+import BusquedaRaicesPuntoFijo as puntoFijo
 import BusquedaRaicesSecante as secante
 
 import OrdenDeConvergencia as ordenConvergencia
@@ -14,6 +14,7 @@ import OrdenDeConvergencia as ordenConvergencia
 
 R = 4.25
 CANT_DE_INTEGRANTES = 6
+CANT_MAX_DE_ITERACIONES = 50
 
 def volumenDelTanqueDeAgua(alturaActual):
     return ( (math.pi * (alturaActual ** 2)* (3*R-alturaActual))/3 )
@@ -61,13 +62,10 @@ def funcionParaBiseccion(x):
     funcionAltura = sym.simplify((-1* (h**3)) + 3*R*(h**2) - (3 * volumenAHallar/ math.pi))
     return funcionAltura.subs(h,x)
 
-def funcionFParaPuntoFijo(x):
-    funcionAltura = sym.simplify((-1* (h**3)) + 3*R*(h**2) - (3 * volumenAHallar/ math.pi))
-    return (funcionAltura.subs(h,x))
-
 def funcionGParaPuntoFijo(x):
-    GdeXParaPuntoFijo = sym.simplify( (( (x**3)/(3*R) ) + (volumenAHallar/(R*math.pi) ))**(1/2))
-    return(GdeXParaPuntoFijo.subs(h,x))
+    GdeXParaPuntoFijo = lambda x: ( (( (x**3)/(3*R) ) + (volumenAHallar/(R*math.pi) ))**(1/2))
+    return (GdeXParaPuntoFijo.subs(h,x))
+
 
 def buscarRaicesConDistintosMetodosYCota(cota):
 
@@ -80,28 +78,30 @@ def buscarRaicesConDistintosMetodosYCota(cota):
 
     resultadoBiseccion = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion)
     print("El resultado por Bisección es: "+ str(resultadoBiseccion[:3]) + "\n")
-    
+
     convergenciaBiseccion = ordenConvergencia.ordenDeConvergencia(resultadoBiseccion[3], resultadoBiseccion[2])
     print("Orden de convergencia: \n")
     print(convergenciaBiseccion)
-    
+
     x= sym.Symbol('x')
     y= sym.Symbol('y')
-    #semillaPuntoFijo = biseccion.busqueda_raiz(0,0, 2*R,cota, funcionParaBiseccion, 3)[0]
+    semillaPuntoFijo = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 3)[0]
     semillaNewton = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 5)[0]
     semillaAux = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 4)[0] # Solo para secante
 
 
     print ("\n--------------- SEMILLAS ----------------- \n")
 
-    #print("Semilla elegida con 3 iteraciones de biseccion: "+ str(semillaPuntoFijo))
+    print("Semilla elegida con 3 iteraciones de biseccion: "+ str(semillaPuntoFijo))
     print("Semilla elegida con 5 iteraciones de biseccion: "+ str(semillaNewton))
     print("Semilla auxiliar elegida con 4 iteraciones de biseccion: "+ str(semillaAux) + "\n")
 
 
-
-    #resultadoPuntoFijo = puntoFijo.busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, funcionFParaPuntoFijo,funcionGParaPuntoFijo)
-    #print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo))
+    resultadoPuntoFijo = puntoFijo.busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, funcionGParaPuntoFijo,CANT_MAX_DE_ITERACIONES)
+    print("===========================================" + "\n")
+    print ("\t \t \t PUNTO FIJO \n")
+    print("===========================================" + "\n")
+    print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo))
 
 
     funcionNewton = sym.simplify((-1* (x**3)) + 3*R*(x**2) - (3 * volumenAHallar/ math.pi))
@@ -112,46 +112,46 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     else:
         resultadoSecante = secante.busqueda_raiz_secante(funcionNewton,\
                                                      semillaNewton, semillaAux,  cota)
-            
+
     print("===========================================" + "\n")
     print ("\t \t \t SECANTE \n")
     print("===========================================" + "\n")
     print("El resultado por Secante es: "+ str(resultadoSecante[:3]) + "\n")
-    
+
     convergenciaSecante = ordenConvergencia.ordenDeConvergencia(resultadoSecante[3], resultadoSecante[2])
     print("Orden de convergencia: \n")
     print(convergenciaSecante)
-    
+
     if(cota == 10**(-5)):
         resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota, False, 4)
-    else:               
+    else:
         resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
-        
+
     print("\n===========================================" + "\n")
     print ("\t \t \t NEWTON \n")
     print("===========================================" + "\n")
-    print("El resultado por Newton es: "+ str(resultadoNewton[:3]) + "\n") 
-        
+    print("El resultado por Newton es: "+ str(resultadoNewton[:3]) + "\n")
+
     convergenciaNewton = ordenConvergencia.ordenDeConvergencia(resultadoNewton[3], resultadoNewton[2])
     print("Orden de convergencia: \n")
     print(convergenciaNewton)
- 
+
     if(cota == 10**(-5)):
         resultadoNewtonMult = newtonMult.busqueda_raiz_newton(funcionNewton, semillaNewton, cota, False, 4)
 
-    else:    
+    else:
         resultadoNewtonMult = newtonMult.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
-   
-    print("\n===========================================" + "\n")        
+
+    print("\n===========================================" + "\n")
     print ("\t \t \t NEWTON MULTIPLE \n")
     print("===========================================" + "\n")
     print("El resultado por Newton Mult es: "+ str(resultadoNewtonMult[:3]))
-            
+
     convergenciaNewtonMult = ordenConvergencia.ordenDeConvergencia(resultadoNewtonMult[3], resultadoNewtonMult[2])
     print("\nOrden de convergencia: \n")
     print(convergenciaNewtonMult)
     print("\n")
-    
+
 x= sym.Symbol('x')
 
 h= sym.Symbol('h')
