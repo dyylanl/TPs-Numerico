@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import BusquedaRaicesBiseccion as biseccion
 import BusquedaRaicesNewton as newton
 import BusquedaRaicesMultiplesNewton as newtonMult
-#import BusquedaRaicesPuntoFijo as puntoFijo
+import BusquedaRaicesPuntoFijo as puntoFijo
 import BusquedaRaicesSecante as secante
 
 import OrdenDeConvergencia as ordenConvergencia
@@ -70,7 +70,7 @@ def funcionFParaPuntoFijo(x):
 
 def funcionGParaPuntoFijo(x):
     GdeXParaPuntoFijo = lambda x: ( (( (x**3)/(3*R) ) + (volumenAHallar/(R*math.pi) ))**(1/2))
-    return (GdeXParaPuntoFijo.subs(h,x))
+    return (GdeXParaPuntoFijo)
 
 def buscarRaicesConDistintosMetodosYCota(cota):
 
@@ -111,7 +111,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("Semilla auxiliar elegida con 4 iteraciones de biseccion: "+ str(semillaAux) + "\n")
 
 
-    resultadoPuntoFijo = puntoFijo.busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, funcionGParaPuntoFijo,CANT_MAX_DE_ITERACIONES)
+    resultadoPuntoFijo = puntoFijo.busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, funcionGParaPuntoFijo, CANT_MAX_DE_ITERACIONES)
     print("===========================================" + "\n")
     print ("\t \t \t PUNTO FIJO \n")
     print("===========================================" + "\n")
