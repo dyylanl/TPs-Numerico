@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sympy as sym
 import matplotlib.pyplot as plt
+from scipy import optimize
 
 import BusquedaRaicesBiseccion as biseccion
 import BusquedaRaicesNewton as newton
@@ -217,5 +218,11 @@ print("a) Volumen del tanque lleno al "+ str(porcentajePedido*100) +  "% calcula
 print("b) El volumen total del tanque es: " + str(volumenLlenoAPorcentaje(1)))
 
 print("\nc) \n")
+
 buscarRaicesConDistintosMetodosYCota(10**(-5))
 buscarRaicesConDistintosMetodosYCota(10**(-13))
+
+raizScipy = optimize.brentq(lambda x: (math.pi * x ** 2 * (3 * R - x)) / 3, 1, 15)
+    
+print("f) Raiz encontrada con función de búsqueda de raíces Scipy: " + str(raizScipy))
+
