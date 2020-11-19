@@ -2,7 +2,7 @@ import numpy as np
 import sys
 
 tolerancia = 1e-38
-numMax = 1e+19      # (1e+19)^2= 1e+38, orden de magnitud a partir del cual puedo tener overflow con 32 bits
+NUMEROMAX = 1e+19      # (1e+19)^2= 1e+38, orden de magnitud a partir del cual puedo tener overflow con 32 bits
 
 print('\n Ingrese los valores ax^2 + bx +c:')
 
@@ -29,7 +29,7 @@ if discriminante < 0:
 #aca ya habiendo corroborado que discriminante>0, utilizo logica adicional para 
 #salvarme en casos de que pueda ocurrir overflow si los coeficientes son muy grandes
 
-if (np.abs(b) >= numMax or np.abs(4*a*c) >= numMax):    
+if (np.abs(b) >= NUMEROMAX or np.abs(4*a*c) >= NUMEROMAX):    
     m = max(np.abs(b), np.sqrt(np.abs(4*a*c)))
     discriminante = (b/m)**2 + (4*a*c)/(m**2)
     x1 = np.float32(-(b + sgn(b)*m*np.sqrt(discriminante))/(2*a))
