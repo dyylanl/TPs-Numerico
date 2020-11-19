@@ -111,7 +111,8 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("Semilla auxiliar elegida con 4 iteraciones de biseccion: "+ str(semillaAux) + "\n")
 
 
-    resultadoPuntoFijo = puntoFijo.busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, funcionGParaPuntoFijo, CANT_MAX_DE_ITERACIONES)
+    GdeXParaPuntoFijo = lambda x: ( (( (x**3)/(3*R) ) + (volumenAHallar/(R*math.pi) ))**(1/2))
+    resultadoPuntoFijo = puntoFijo.busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, GdeXParaPuntoFijo, CANT_MAX_DE_ITERACIONES)
     print("===========================================" + "\n")
     print ("\t \t \t PUNTO FIJO \n")
     print("===========================================" + "\n")
