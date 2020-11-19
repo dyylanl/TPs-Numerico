@@ -69,8 +69,9 @@ def funcionGParaPuntoFijo(x):
     GdeXParaPuntoFijo = sym.simplify( ((3*R*(h**2)) - (3 * volumenAHallar/ math.pi ))**(1/3))
     return(GdeXParaPuntoFijo.subs(h,x))
 
-def buscarRaicesConDistintosMetodosYCota(cota):
 
+
+def buscarRaicesConDistintosMetodosYCota(cota):
 
     print("\n Usando la cota de error: " + str(cota)+ "\n ")
 
@@ -83,7 +84,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
 
     x= sym.Symbol('x')
     y= sym.Symbol('y')
-    semillaPuntoFijo = biseccion.busqueda_raiz(0,0, 2*R,cota, funcionParaBiseccion, 3)[0]
+    semillaPuntoFijo = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 3)[0]
     semillaNewton = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 5)[0]
     semillaAux = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 4)[0] # Solo para secante
 
@@ -97,7 +98,10 @@ def buscarRaicesConDistintosMetodosYCota(cota):
 
 
     resultadoPuntoFijo = puntoFijo.busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, funcionFParaPuntoFijo,funcionGParaPuntoFijo)
-    #print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo))
+    print("===========================================" + "\n")
+    print ("\t \t \t PUNTO FIJO \n")
+    print("===========================================" + "\n")
+    print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo))
 
 
     funcionNewton = sym.simplify((-1* (x**3)) + 3*R*(x**2) - (3 * volumenAHallar/ math.pi))

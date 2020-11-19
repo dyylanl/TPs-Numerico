@@ -3,62 +3,19 @@ import numpy as np
 
 # g(x) se calcula "a mano" usando que f(x) = g(x) - x
 
-
-
-
-def g(x):
-    return math.cos(x)
-
-def f(x):
-    return g(x) -x
-
-
-# BusquedaRaicesBiseccion aproxima a la raiz de f(x) con un error epsilon.
-def busqueda_raiz_biseccion(inicio, fin, epsilon):
-    N = math.ceil(np.log2((fin-inicio)/epsilon))
-    print("Iteraciones (biseccion): " + str(N))
-    return busqueda_raiz_rec(inicio, fin, N)
-
-
-
-def busqueda_raiz_rec(inicio, fin, N):
-    medio = (inicio+fin)/2
-    if (f(medio) == 0 or N <= 1):
-        return (medio, (fin-inicio)/2)
-
-    if (f(medio) * f(inicio) > 0):
-        return busqueda_raiz_rec(medio, fin, N-1)
-
-    else:    # (f(medio) * f(inicio) < 0):
-        return busqueda_raiz_rec(inicio, medio, N-1)
-
-
-# La semilla se calcula usando BusquedaRaicesBiseccion, el error es el pedido.
-#def busqueda_raiz_punto_fijo(semilla, error):
-#    dato_viejo = semilla
-#    dato = g(dato_viejo)
-#    iteracion = 1
-#    while not abs(dato - dato_viejo) <= error:
-#        iteracion += 1
-#        dato_viejo= dato
-#        dato = g(dato_viejo)
-#    print("Iteraciones (punto fijo): " + str(iteracion))
-#    return (dato, abs(dato - dato_viejo))
-
-
-def busqueda_raiz_punto_fijo(semillaPorBiseccion, cota, f(x), g(x)):
+def busqueda_raiz_punto_fijo(semillaPorBiseccion, cota, funcF, funcG):
     dato_viejo = semillaPorBiseccion
-    dato = g(dato_viejo)
+    dato = funcG(dato_viejo)
     iteracion = 1
     while not abs(dato - dato_viejo) <= cota:
         iteracion += 1
         dato_viejo= dato
-        dato = g(dato_viejo)
+        dato = funcG(dato_viejo)
     print("Iteraciones (punto fijo): " + str(iteracion))
     return (dato, abs(dato - dato_viejo))
 
 
 #res = busqueda_raiz_punto_fijo(aproximacion_biseccion[0], 0.001)
-res = busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, funcionFParaPuntoFijo,funcionGParaPuntoFijo)
+#res = busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, funcionFParaPuntoFijo,funcionGParaPuntoFijo)
 
-print(res)
+#print(res)
