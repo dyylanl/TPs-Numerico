@@ -10,23 +10,33 @@ import numpy as np
 def f(x):
     return x**3
 
-def busqueda_raiz_newton(funcion, semilla, error, paso_a_paso=False):
+def busqueda_raiz_newton(funcion, semilla, error, paso_a_paso=False, iteracionesForzadas = None):
     x= sym.Symbol('x')
     # Pn = x- f(x)*f'(x) / [ (f'(x) ^2) - f(x)*f''(x)]
     sucesion = sym.simplify( x - ((funcion*sym.diff(funcion)) / (sym.diff(funcion,x)**2 -funcion * sym.diff(funcion,x,2))) )
     dato_viejo = semilla
     dato = sucesion.subs(x, dato_viejo)
     iteraciones = 1
+    
     #si hago más de 50 iteraciones no va a funcionar esto
     historia = np.zeros((50, 2))
     
-    while not abs( dato - dato_viejo) <= error:
-        historia[iteraciones - 1] = (iteraciones, dato)
-        iteraciones +=1
-        if paso_a_paso:
-            mostrar_informacion(dato, abs(dato-dato_viejo), iteraciones)
-        dato_viejo = dato
-        dato = sucesion.subs(x, dato_viejo)
+    if (iteracionesForzadas == None) :
+        while not abs( dato - dato_viejo) <= error:
+            historia[iteraciones - 1] = (iteraciones, dato)
+            iteraciones +=1
+            if paso_a_paso:
+                mostrar_informacion(dato, abs(dato-dato_viejo), iteraciones)
+            dato_viejo = dato
+            dato = sucesion.subs(x, dato_viejo)
+    else:
+        while (iteraciones < iteracionesForzadas):
+            historia[iteraciones - 1] = (iteraciones, dato)
+            iteraciones +=1
+            if paso_a_paso:
+                mostrar_informacion(dato, abs(dato-dato_viejo), iteraciones)
+            dato_viejo = dato
+            dato = sucesion.subs(x, dato_viejo)
          
     historia[iteraciones - 1] = (iteraciones, dato)
     historia = historia [:iteraciones]

@@ -3,14 +3,13 @@ import sympy as sym
 import numpy as np
 
 
-
 # Este metodo solo se usa si f'(p) != 0 (siendo p la raiz de la funcion f)
 # (Solo para funciones con raices simples)
 # En el caso que f'(p) == 0, usar metodo de Newton para raices multiples
 def f(x):
     return x**2 -1
 
-def busqueda_raiz_newton(funcion, semilla, error, paso_a_paso=False):
+def busqueda_raiz_newton(funcion, semilla, error, paso_a_paso=False, iteracionesForzadas = None):
     x= sym.Symbol('x')
     sucesion = sym.simplify( x - (funcion / sym.diff(funcion)) )
     dato_viejo = semilla
@@ -19,14 +18,23 @@ def busqueda_raiz_newton(funcion, semilla, error, paso_a_paso=False):
     #si hago más de 50 iteraciones no va a funcionar esto
     historia = np.zeros((50, 2))
     
-    while not (abs(dato - dato_viejo) <= error):
-        historia[iteraciones - 1] = (iteraciones, dato)
-        #print(dato)
-        iteraciones+=1
-        if paso_a_paso:
-             mostrar_informacion(dato, abs(dato-dato_viejo), iteraciones)
-        dato_viejo = dato
-        dato = sucesion.subs(x, dato_viejo)
+    if (iteracionesForzadas == None):
+        while not (abs(dato - dato_viejo) <= error):
+            historia[iteraciones - 1] = (iteraciones, dato)
+            iteraciones+=1
+            if paso_a_paso:
+                mostrar_informacion(dato, abs(dato-dato_viejo), iteraciones)
+            dato_viejo = dato
+            dato = sucesion.subs(x, dato_viejo)
+            
+    else:
+        while(iteraciones < iteracionesForzadas):
+            historia[iteraciones - 1] = (iteraciones, dato)
+            iteraciones+=1
+            if paso_a_paso:
+                mostrar_informacion(dato, abs(dato-dato_viejo), iteraciones)
+            dato_viejo = dato
+            dato = sucesion.subs(x, dato_viejo)
     
     historia[iteraciones - 1] = (iteraciones, dato)
     historia = historia [:iteraciones]
