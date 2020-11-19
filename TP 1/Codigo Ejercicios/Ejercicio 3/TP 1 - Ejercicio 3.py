@@ -2,6 +2,7 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 import sympy as sym
+import matplotlib.pyplot as plt
 
 import BusquedaRaicesBiseccion as biseccion
 import BusquedaRaicesNewton as newton
@@ -85,6 +86,13 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("Orden de convergencia: \n")
     print(convergenciaBiseccion)
     
+    plt.figure()
+    plt.plot(convergenciaBiseccion[:,0], convergenciaBiseccion[:,1], '-', lw = 2, label = 'Biseccion')
+    plt.xlabel("Iteración")
+    plt.ylabel("Orden de convergencia")
+    plt.grid(True)
+    plt.title("Orden de convergencia Bisección")
+    
     x= sym.Symbol('x')
     y= sym.Symbol('y')
     #semillaPuntoFijo = biseccion.busqueda_raiz(0,0, 2*R,cota, funcionParaBiseccion, 3)[0]
@@ -122,6 +130,14 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("Orden de convergencia: \n")
     print(convergenciaSecante)
     
+    plt.figure()
+    plt.plot(convergenciaSecante[:,0], convergenciaSecante[:,1], '-', lw = 2, label = 'Biseccion')
+    plt.xlabel("Iteración")
+    plt.ylabel("Orden de convergencia")
+    plt.grid(True)
+    plt.title("Orden de convergencia Secante")
+    plt.show()
+    
     if(cota == 10**(-5)):
         resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota, False, 4)
     else:               
@@ -135,6 +151,14 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     convergenciaNewton = ordenConvergencia.ordenDeConvergencia(resultadoNewton[3], resultadoNewton[2])
     print("Orden de convergencia: \n")
     print(convergenciaNewton)
+    
+    plt.figure()
+    plt.plot(convergenciaNewton[:,0], convergenciaNewton[:,1], '-', lw = 2, label = 'Biseccion')
+    plt.xlabel("Iteración")
+    plt.ylabel("Orden de convergencia")
+    plt.grid(True)
+    plt.title("Orden de convergencia Newton")
+    plt.show()
  
     if(cota == 10**(-5)):
         resultadoNewtonMult = newtonMult.busqueda_raiz_newton(funcionNewton, semillaNewton, cota, False, 4)
@@ -150,6 +174,15 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     convergenciaNewtonMult = ordenConvergencia.ordenDeConvergencia(resultadoNewtonMult[3], resultadoNewtonMult[2])
     print("\nOrden de convergencia: \n")
     print(convergenciaNewtonMult)
+    
+    plt.figure()
+    plt.plot(convergenciaNewtonMult[:,0], convergenciaNewtonMult[:,1], '-', lw = 2, label = 'Biseccion')
+    plt.xlabel("Iteración")
+    plt.ylabel("Orden de convergencia")
+    plt.grid(True)
+    plt.title("Orden de convergencia Newton Múltiple")
+    plt.show()
+    
     print("\n")
     
 x= sym.Symbol('x')
