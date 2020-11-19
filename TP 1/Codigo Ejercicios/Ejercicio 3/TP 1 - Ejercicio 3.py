@@ -61,13 +61,10 @@ def funcionParaBiseccion(x):
     funcionAltura = sym.simplify((-1* (h**3)) + 3*R*(h**2) - (3 * volumenAHallar/ math.pi))
     return funcionAltura.subs(h,x)
 
-def funcionFParaPuntoFijo(x):
-    funcionAltura = sym.simplify((-1* (h**3)) + 3*R*(h**2) - (3 * volumenAHallar/ math.pi))
-    return (funcionAltura.subs(h,x))
-
 def funcionGParaPuntoFijo(x):
-    GdeXParaPuntoFijo = sym.simplify( ((3*R*(h**2)) - (3 * volumenAHallar/ math.pi ))**(1/3))
+    GdeXParaPuntoFijo = sym.simplify( (( (x**3)/(3*R) ) + (volumenAHallar/(R*math.pi) ))**(1/2))
     return(GdeXParaPuntoFijo.subs(h,x))
+
 
 def buscarRaicesConDistintosMetodosYCota(cota):
 
@@ -80,9 +77,9 @@ def buscarRaicesConDistintosMetodosYCota(cota):
 
     resultadoBiseccion = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion)
     print("El resultado por Bisección es: "+ str(resultadoBiseccion[:3]) + "\n")
-    
+
     convergenciaBiseccion = ordenConvergencia.ordenDeConvergencia(resultadoBiseccion[3], resultadoBiseccion[2])
-    
+
     x= sym.Symbol('x')
     y= sym.Symbol('y')
     #semillaPuntoFijo = biseccion.busqueda_raiz(0,0, 2*R,cota, funcionParaBiseccion, 3)[0]
@@ -110,7 +107,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print ("\t \t \t SECANTE \n")
     print("===========================================" + "\n")
     print("El resultado por Secante es: "+ str(resultadoSecante[:3]) + "\n")
-    
+
     convergenciaSecante = ordenConvergencia.ordenDeConvergencia(resultadoSecante[3], resultadoSecante[2])
 
     resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
