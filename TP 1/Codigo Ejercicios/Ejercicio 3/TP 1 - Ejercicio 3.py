@@ -11,6 +11,7 @@ import BusquedaRaicesMultiplesNewton as newtonMult
 import BusquedaRaicesSecante as secante
 
 import OrdenDeConvergencia as ordenConvergencia
+import ConstanteAsintotica as cteAsintotica
 
 
 R = 4.25
@@ -93,6 +94,8 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     plt.grid(True)
     plt.title("Orden de convergencia Bisección")
     
+    cteAsintoticaBiseccion = cteAsintotica.calcularConstanteAsintotica(resultadoBiseccion[3], resultadoBiseccion[2], 1)
+    
     x= sym.Symbol('x')
     y= sym.Symbol('y')
     #semillaPuntoFijo = biseccion.busqueda_raiz(0,0, 2*R,cota, funcionParaBiseccion, 3)[0]
@@ -120,6 +123,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     else:
         resultadoSecante = secante.busqueda_raiz_secante(funcionNewton,\
                                                      semillaNewton, semillaAux,  cota)
+        print(resultadoSecante[3])
             
     print("===========================================" + "\n")
     print ("\t \t \t SECANTE \n")
@@ -138,11 +142,14 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     plt.title("Orden de convergencia Secante")
     plt.show()
     
+    cteAsintoticaSecante = cteAsintotica.calcularConstanteAsintotica(resultadoSecante[3], resultadoSecante[2], 2)
+
+    
     if(cota == 10**(-5)):
         resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota, False, 4)
     else:               
         resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
-        
+  
     print("\n===========================================" + "\n")
     print ("\t \t \t NEWTON \n")
     print("===========================================" + "\n")
@@ -159,6 +166,9 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     plt.grid(True)
     plt.title("Orden de convergencia Newton")
     plt.show()
+    
+    cteAsintoticaNewton = cteAsintotica.calcularConstanteAsintotica(resultadoNewton[3], resultadoNewton[2], 2)
+    
  
     if(cota == 10**(-5)):
         resultadoNewtonMult = newtonMult.busqueda_raiz_newton(funcionNewton, semillaNewton, cota, False, 4)
@@ -182,6 +192,8 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     plt.grid(True)
     plt.title("Orden de convergencia Newton Múltiple")
     plt.show()
+    
+    cteAsintoticaNewtonMult = cteAsintotica.calcularConstanteAsintotica(resultadoNewtonMult[3], resultadoNewtonMult[2], 2)    
     
     print("\n")
     
