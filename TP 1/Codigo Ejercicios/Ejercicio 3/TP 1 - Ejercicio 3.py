@@ -95,6 +95,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     plt.title("Orden de convergencia Bisección")
 
     cteAsintoticaBiseccion = cteAsintotica.calcularConstanteAsintotica(resultadoBiseccion[3], resultadoBiseccion[2], 1)
+    
     crearTabla.crearTabla(resultadoBiseccion[3], convergenciaBiseccion, cteAsintoticaBiseccion)
     x= sym.Symbol('x')
     y= sym.Symbol('y')
@@ -118,7 +119,6 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo[:3]) + "\n")
 
     convergenciaPuntoFijo = ordenConvergencia.ordenDeConvergencia(resultadoPuntoFijo[3], resultadoPuntoFijo[2])
-    
     plt.figure()
     plt.plot(convergenciaPuntoFijo[:,0], convergenciaPuntoFijo[:,1], '-', lw = 2, label = 'Punto Fijo')
     plt.xlabel("Iteración")
@@ -127,6 +127,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     plt.title("Orden de convergencia Punto Fijo")
     plt.show()
     
+    cteAsintoticaPuntoFijo = cteAsintotica.calcularConstanteAsintotica(resultadoPuntoFijo[3], resultadoPuntoFijo[2], 1)
     funcionNewton = sym.simplify((-1* (x**3)) + 3*R*(x**2) - (3 * volumenAHallar/ math.pi))
 
     if (cota == 10**(-5)):
