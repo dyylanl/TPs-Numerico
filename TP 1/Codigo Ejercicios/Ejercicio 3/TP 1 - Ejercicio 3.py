@@ -13,6 +13,7 @@ import BusquedaRaicesSecante as secante
 
 import OrdenDeConvergencia as ordenConvergencia
 import ConstanteAsintotica as cteAsintotica
+import CrearTablaConDatos as crearTabla
 
 
 R = 4.25
@@ -83,9 +84,9 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("El resultado por Bisección es: "+ str(resultadoBiseccion[:3]) + "\n")
 
     convergenciaBiseccion = ordenConvergencia.ordenDeConvergencia(resultadoBiseccion[3], resultadoBiseccion[2])
-    print("Orden de convergencia: \n")
-    print(convergenciaBiseccion)
-
+    #print("Orden de convergencia: \n")
+   # print(convergenciaBiseccion)
+    
     plt.figure()
     plt.plot(convergenciaBiseccion[:,0], convergenciaBiseccion[:,1], '-', lw = 2, label = 'Biseccion')
     plt.xlabel("Iteración")
@@ -94,7 +95,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     plt.title("Orden de convergencia Bisección")
 
     cteAsintoticaBiseccion = cteAsintotica.calcularConstanteAsintotica(resultadoBiseccion[3], resultadoBiseccion[2], 1)
-
+    crearTabla.crearTabla(resultadoBiseccion[3], convergenciaBiseccion, cteAsintoticaBiseccion)
     x= sym.Symbol('x')
     y= sym.Symbol('y')
     semillaPuntoFijo = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 3)[0]
@@ -114,8 +115,18 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("===========================================" + "\n")
     print ("\t \t \t PUNTO FIJO \n")
     print("===========================================" + "\n")
-    print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo))
+    print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo[:3]) + "\n")
 
+    convergenciaPuntoFijo = ordenConvergencia.ordenDeConvergencia(resultadoPuntoFijo[3], resultadoPuntoFijo[2])
+    
+    plt.figure()
+    plt.plot(convergenciaPuntoFijo[:,0], convergenciaPuntoFijo[:,1], '-', lw = 2, label = 'Punto Fijo')
+    plt.xlabel("Iteración")
+    plt.ylabel("Orden de convergencia")
+    plt.grid(True)
+    plt.title("Orden de convergencia Punto Fijo")
+    plt.show()
+    
     funcionNewton = sym.simplify((-1* (x**3)) + 3*R*(x**2) - (3 * volumenAHallar/ math.pi))
 
     if (cota == 10**(-5)):
@@ -124,19 +135,19 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     else:
         resultadoSecante = secante.busqueda_raiz_secante(funcionNewton,\
                                                      semillaNewton, semillaAux,  cota)
-        print(resultadoSecante[3])
+        
 
     print("===========================================" + "\n")
     print ("\t \t \t SECANTE \n")
     print("===========================================" + "\n")
     print("El resultado por Secante es: "+ str(resultadoSecante[:3]) + "\n")
-
+    
     convergenciaSecante = ordenConvergencia.ordenDeConvergencia(resultadoSecante[3], resultadoSecante[2])
     print("Orden de convergencia: \n")
     print(convergenciaSecante)
 
     plt.figure()
-    plt.plot(convergenciaSecante[:,0], convergenciaSecante[:,1], '-', lw = 2, label = 'Biseccion')
+    plt.plot(convergenciaSecante[:,0], convergenciaSecante[:,1], '-', lw = 2, label = 'Secante')
     plt.xlabel("Iteración")
     plt.ylabel("Orden de convergencia")
     plt.grid(True)
@@ -161,7 +172,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print(convergenciaNewton)
 
     plt.figure()
-    plt.plot(convergenciaNewton[:,0], convergenciaNewton[:,1], '-', lw = 2, label = 'Biseccion')
+    plt.plot(convergenciaNewton[:,0], convergenciaNewton[:,1], '-', lw = 2, label = 'Newton')
     plt.xlabel("Iteración")
     plt.ylabel("Orden de convergencia")
     plt.grid(True)
@@ -187,7 +198,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print(convergenciaNewtonMult)
 
     plt.figure()
-    plt.plot(convergenciaNewtonMult[:,0], convergenciaNewtonMult[:,1], '-', lw = 2, label = 'Biseccion')
+    plt.plot(convergenciaNewtonMult[:,0], convergenciaNewtonMult[:,1], '-', lw = 2, label = 'Newton Múltiple')
     plt.xlabel("Iteración")
     plt.ylabel("Orden de convergencia")
     plt.grid(True)
