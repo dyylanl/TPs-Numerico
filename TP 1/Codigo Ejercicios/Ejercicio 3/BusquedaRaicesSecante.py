@@ -10,14 +10,14 @@ def busqueda_raiz_secante(funcion, semilla1, semilla2, error, paso_a_paso=False,
     dato_viejo2 = semilla2
     
     #si tiene mas de 50 iteraciones no va a funcionar
-    historia = np.zeros((50, 2))
+    historia = np.zeros((50, 3))
     
     iteraciones = 1
     
     dato =  dato_viejo1 - (((funcion.subs(x,dato_viejo1)) * (dato_viejo1 - dato_viejo2))/ ((funcion.subs(x, dato_viejo1)) - funcion.subs(x, dato_viejo2) ) )
     if (iteracionesForzadas == None):
         while not (abs(dato - dato_viejo1) <= error):
-            historia[iteraciones - 1] = (iteraciones, dato)
+            historia[iteraciones - 1] = (iteraciones, dato, abs(dato-dato_viejo1))
             iteraciones+=1
             if paso_a_paso:
                 mostrar_informacion(dato, abs(dato-dato_viejo1), iteraciones)
@@ -27,7 +27,7 @@ def busqueda_raiz_secante(funcion, semilla1, semilla2, error, paso_a_paso=False,
     else:
         
         while (iteraciones < iteracionesForzadas):
-            historia[iteraciones - 1] = (iteraciones, dato)
+            historia[iteraciones - 1] = (iteraciones, dato, abs(dato-dato_viejo1))
             iteraciones+=1
             if paso_a_paso:
                 mostrar_informacion(dato, abs(dato-dato_viejo1), iteraciones)           
@@ -35,8 +35,7 @@ def busqueda_raiz_secante(funcion, semilla1, semilla2, error, paso_a_paso=False,
             dato_viejo1 = dato
             dato = dato_viejo1 - (((funcion.subs(x,dato_viejo1)) * (dato_viejo1 - dato_viejo2))/ ((funcion.subs(x, dato_viejo1)) - funcion.subs(x, dato_viejo2) ))
            
-    mostrar_informacion(dato, abs(dato-dato_viejo1), iteraciones)
-    historia[iteraciones - 1] = (iteraciones, dato)
+    historia[iteraciones - 1] = (iteraciones, dato, abs(dato-dato_viejo1))
     historia = historia[:iteraciones]
     return (dato, abs(dato- dato_viejo1), iteraciones, historia)
 

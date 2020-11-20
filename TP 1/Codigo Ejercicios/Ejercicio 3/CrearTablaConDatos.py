@@ -6,10 +6,10 @@ import BusquedaRaicesBiseccion as biseccion
 
 def crearTabla (historiaRaices, convergencia, cteAsintotica):
 
-    print("Iteración\t\t\t\tRaiz\t\tConvergencia\tCte Asintótica") 
+    print("Iteración\t\t\t\tRaiz\t\t\t\t\tError\t\tConvergencia\tCte Asintótica") 
     for i in range(0, len(historiaRaices) - 1):
     
-        print("\t" + str(i) + str("\t\t\t{:.16f}".format(historiaRaices[i][1])) + "\t\t" + str(convergencia[i][1]) + "\t\t\t\t" + str(cteAsintotica[i][1]))
+        print("\t" + str(i) + str("\t\t\t{:.16f}".format(historiaRaices[i][1])) + "\t\t" + str("{:.16f}".format(historiaRaices[i][2])) + "\t\t" + str(convergencia[i][1]) + "\t\t\t\t" + str(cteAsintotica[i][1]))
 
 #R = 4.25
 
@@ -23,7 +23,4 @@ def crearTabla (historiaRaices, convergencia, cteAsintotica):
 #convergenciaBiseccion = ordenConvergencia.ordenDeConvergencia(resultadoBiseccion[3], resultadoBiseccion[2])
 #cteAsintoticaBiseccion = cteAsintotica.calcularConstanteAsintotica(resultadoBiseccion[3], resultadoBiseccion[2], 1)
 
-#print(resultadoBiseccion[3])
-#print(convergenciaBiseccion)
-#print(cteAsintoticaBiseccion)
 #crearTabla(resultadoBiseccion[3], convergenciaBiseccion, cteAsintoticaBiseccion)

@@ -16,11 +16,11 @@ def busqueda_raiz_newton(funcion, semilla, error, paso_a_paso=False, iteraciones
     dato = sucesion.subs(x, dato_viejo)
     iteraciones = 1
     #si hago más de 50 iteraciones no va a funcionar esto
-    historia = np.zeros((50, 2))
+    historia = np.zeros((50, 3))
     
     if (iteracionesForzadas == None):
         while not (abs(dato - dato_viejo) <= error):
-            historia[iteraciones - 1] = (iteraciones, dato)
+            historia[iteraciones - 1] = (iteraciones, dato, abs(dato-dato_viejo))
             iteraciones+=1
             if paso_a_paso:
                 mostrar_informacion(dato, abs(dato-dato_viejo), iteraciones)
@@ -29,14 +29,14 @@ def busqueda_raiz_newton(funcion, semilla, error, paso_a_paso=False, iteraciones
             
     else:
         while(iteraciones < iteracionesForzadas):
-            historia[iteraciones - 1] = (iteraciones, dato)
+            historia[iteraciones - 1] = (iteraciones, dato, abs(dato-dato_viejo))
             iteraciones+=1
             if paso_a_paso:
                 mostrar_informacion(dato, abs(dato-dato_viejo), iteraciones)
             dato_viejo = dato
             dato = sucesion.subs(x, dato_viejo)
     
-    historia[iteraciones - 1] = (iteraciones, dato)
+    historia[iteraciones - 1] = (iteraciones, dato, abs(dato-dato_viejo))
     historia = historia [:iteraciones]
     
     return (dato, abs(dato- dato_viejo), iteraciones, historia)
