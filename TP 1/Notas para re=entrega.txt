@@ -1,0 +1,22 @@
+Objetivo del Trabajo -> Mejor que arranque con la Introducción, después los objetivos.
+No ligar tanto el informe a la cuestión académica de la clase. El objetivo no es aplicar los conceptos, es estudiar los métodos de búsqueda de raíces. Poner un objetivo más general, más formalizado.
+El objetivo del trabajo es estudiar qué? Métodos Numéricos para Búsqueda de Raíces.
+
+La Introducción está bien, pero hay que arreglar el texto con lenguaje más académico. Hay que decir lo que estamos por hacer/presentar en el infrome, no meter las conclusiones (a lo "No es lo más eficiente"). En realidad en la primera parte intentamos hallar la clave de un candado.
+
+Los errores generados por cálculos computacionales tienen un nombre, ver cuáles son.
+
+
+No tiene sentido hablar de convergencia en Fuerza Bruta.
+
+Agregar lo de 10^19 como número máximo para b o 4ac.
+
+Hacer el análisis también con f2(x) (la del tanque lleno).
+
+La conclusión es muy pobre, hay muy poco análisis sobre cómo se relaciona lo teórico de lo real. Analizar el tema de la cantidad de iteraciones y las semillas, alejar la semilla a mano para poder analizar la convergencia.
+
+Ver que gráficos aportan información, algunos no dan para ningún análisis. 
+
+Hay que encontrar la manera de conseguir más iteraciones (alejando las semillas a mano, por ejemplo).
+
+Las conclusiones de la parte 3 tienen que estar mucho más desarrollada, agregarle cosas de convergencia, y más general del trabajo. Quizás sacarle las subdivisiones entre partes a la Conclusión.
