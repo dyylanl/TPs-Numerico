@@ -78,6 +78,18 @@ def funcionGParaPuntoFijo(y):
     GdeXParaPuntoFijo = lambda x: ( (( (x**3)/(3*R) ) + (volumenAHallar/(R*math.pi) ))**(1/2))
     return (GdeXParaPuntoFijo(y))
 
+def graficar(funcion, Label, xLabel, yLabel, title):
+  
+    plt.figure()
+    plt.plot(funcion[:,0], funcion[:,1], '-', lw = 2, label = Label)
+    plt.xlabel(xLabel)
+    plt.ylabel(yLabel)
+    plt.grid(True)
+    plt.title(title)
+    plt.show()
+   
+
+
 def buscarRaicesConDistintosMetodosYCota(cota):
 
 
@@ -91,24 +103,11 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("El resultado por Bisección es: "+ str(resultadoBiseccion[:3]) + "\n")
 
     convergenciaBiseccion = ordenConvergencia.ordenDeConvergencia(resultadoBiseccion[3], resultadoBiseccion[2])
-    #print("Orden de convergencia: \n")
-   # print(convergenciaBiseccion)
+    graficar(convergenciaBiseccion,'Biseccion', "Iteracion", "Orden de convergencia", "Orden de convergencia Biseccion")
 
-    plt.figure()
-    plt.plot(convergenciaBiseccion[:,0], convergenciaBiseccion[:,1], '-', lw = 2, label = 'Biseccion')
-    plt.xlabel("Iteración")
-    plt.ylabel("Orden de convergencia")
-    plt.grid(True)
-    plt.title("Orden de convergencia Bisección")
 
-    cteAsintoticaBiseccion = cteAsintotica.calcularConstanteAsintotica(resultadoBiseccion[3], resultadoBiseccion[2], 1)
-
-    plt.figure()
-    plt.plot(cteAsintoticaBiseccion[:,0], cteAsintoticaBiseccion[:,1], '-', lw = 2, label = 'Biseccion')
-    plt.xlabel("Iteración")
-    plt.ylabel("Constante Asintótica")
-    plt.grid(True)
-    plt.title("Constante Asintótica Bisección")
+    cteAsintoticaBiseccion = cteAsintotica.calcularConstanteAsintotica(resultadoBiseccion[3], resultadoBiseccion[2], 1)    
+    graficar(cteAsintoticaBiseccion,'Biseccion', "Iteracion", "Constante Asintotica", "Constante asintotica Biseccion")
 
     crearTabla.crearTabla(resultadoBiseccion[3], convergenciaBiseccion, cteAsintoticaBiseccion)
     x= sym.Symbol('x')
@@ -133,23 +132,11 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo[:3]) + "\n")
 
     convergenciaPuntoFijo = ordenConvergencia.ordenDeConvergencia(resultadoPuntoFijo[3], resultadoPuntoFijo[2])
-
-    plt.figure()
-    plt.plot(convergenciaPuntoFijo[:,0], convergenciaPuntoFijo[:,1], '-', lw = 2, label = 'Punto Fijo')
-    plt.xlabel("Iteración")
-    plt.ylabel("Orden de convergencia")
-    plt.grid(True)
-    plt.title("Orden de convergencia Punto Fijo")
-    plt.show()
+    graficar(convergenciaPuntoFijo, 'Punto Fijo', "Iteracion", "Orden de convergencia", "Orden de convergencia Punto Fijo")
 
     cteAsintoticaPuntoFijo = cteAsintotica.calcularConstanteAsintotica(resultadoPuntoFijo[3], resultadoPuntoFijo[2], 1)
+    graficar(cteAsintoticaPuntoFijo, 'Punto Fijo', "Iteracion", "Constante Asintotica", "Constante Asintotica Punto Fijo")
 
-    plt.figure()
-    plt.plot(cteAsintoticaPuntoFijo[:,0], cteAsintoticaPuntoFijo[:,1], '-', lw = 2, label = 'Punto Fijo')
-    plt.xlabel("Iteración")
-    plt.ylabel("Constante Asintótica")
-    plt.grid(True)
-    plt.title("Constante Asintótica Punto Fijo")
 
     crearTabla.crearTabla(resultadoPuntoFijo[3], convergenciaPuntoFijo, cteAsintoticaPuntoFijo)
 
@@ -169,25 +156,12 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("El resultado por Secante es: "+ str(resultadoSecante[:3]) + "\n")
 
     convergenciaSecante = ordenConvergencia.ordenDeConvergencia(resultadoSecante[3], resultadoSecante[2] + 2)
-    #print("Orden de convergencia: \n")
-    #print(convergenciaSecante)
-
-    plt.figure()
-    plt.plot(convergenciaSecante[:,0], convergenciaSecante[:,1], '-', lw = 2, label = 'Secante')
-    plt.xlabel("Iteración")
-    plt.ylabel("Orden de convergencia")
-    plt.grid(True)
-    plt.title("Orden de convergencia Secante")
-    plt.show()
-
+    graficar(convergenciaSecante, 'Secante', "Iteracion", "Orden de convergencia", "Orden de convergencia Secante")
+    
+    
     cteAsintoticaSecante = cteAsintotica.calcularConstanteAsintotica(resultadoSecante[3], resultadoSecante[2] + 2, 2)
-
-    plt.figure()
-    plt.plot(cteAsintoticaSecante[:,0], cteAsintoticaSecante[:,1], '-', lw = 2, label = 'Secante')
-    plt.xlabel("Iteración")
-    plt.ylabel("Constante Asintótica")
-    plt.grid(True)
-    plt.title("Constante Asintótica Secante")
+    graficar(cteAsintoticaSecante, 'Secante', "Iteracion", "Constante Asintotica", "Constante Asintotica Secante")
+    
 
     crearTabla.crearTabla(resultadoSecante[3], convergenciaSecante, cteAsintoticaSecante)
 
@@ -202,25 +176,11 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("El resultado por Newton es: "+ str(resultadoNewton[:3]) + "\n")
 
     convergenciaNewton = ordenConvergencia.ordenDeConvergencia(resultadoNewton[3], resultadoNewton[2])
-    #print("Orden de convergencia: \n")
-    #print(convergenciaNewton)
+    graficar(convergenciaNewton, 'Newton', "Iteracion", "Orden de convergencia", "Orden de convergencia Newton")
 
-    plt.figure()
-    plt.plot(convergenciaNewton[:,0], convergenciaNewton[:,1], '-', lw = 2, label = 'Newton')
-    plt.xlabel("Iteración")
-    plt.ylabel("Orden de convergencia")
-    plt.grid(True)
-    plt.title("Orden de convergencia Newton")
-    plt.show()
 
     cteAsintoticaNewton = cteAsintotica.calcularConstanteAsintotica(resultadoNewton[3], resultadoNewton[2], 2)
-
-    plt.figure()
-    plt.plot(cteAsintoticaNewton[:,0], cteAsintoticaNewton[:,1], '-', lw = 2, label = 'Newton')
-    plt.xlabel("Iteración")
-    plt.ylabel("Constante Asintótica")
-    plt.grid(True)
-    plt.title("Constante Asintótica Newton")
+    graficar(cteAsintoticaNewton, 'Newton', "Iteracion", "Constante Asintotica", "Constante Asintotica Newton")
 
     crearTabla.crearTabla(resultadoNewton[3], convergenciaNewton, cteAsintoticaNewton)
 
@@ -238,23 +198,10 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     convergenciaNewtonMult = ordenConvergencia.ordenDeConvergencia(resultadoNewtonMult[3], resultadoNewtonMult[2])
     print("\nOrden de convergencia: \n")
     print(convergenciaNewtonMult)
-
-    plt.figure()
-    plt.plot(convergenciaNewtonMult[:,0], convergenciaNewtonMult[:,1], '-', lw = 2, label = 'Newton Múltiple')
-    plt.xlabel("Iteración")
-    plt.ylabel("Orden de convergencia")
-    plt.grid(True)
-    plt.title("Orden de convergencia Newton Múltiple")
-    plt.show()
-
+    graficar(convergenciaNewtonMult, 'Newtorn Multiple', "Iteracion", "Orden de convergencia", "Orden de convergencia Newton Multiple")
+   
     cteAsintoticaNewtonMult = cteAsintotica.calcularConstanteAsintotica(resultadoNewtonMult[3], resultadoNewtonMult[2], 2)
-
-    plt.figure()
-    plt.plot(cteAsintoticaNewtonMult[:,0], cteAsintoticaNewtonMult[:,1], '-', lw = 2, label = 'Newton Múltiple')
-    plt.xlabel("Iteración")
-    plt.ylabel("Constante Asintótica")
-    plt.grid(True)
-    plt.title("Constante Asintótica Newton Múltiple")
+    graficar(cteAsintoticaNewtonMult, 'Newton Multiple', "Iteracion", "Constante Asintotica", "Constante Asintotica Newton Multiple")
 
     crearTabla.crearTabla(resultadoNewtonMult[3], convergenciaNewtonMult, cteAsintoticaNewtonMult)
 
