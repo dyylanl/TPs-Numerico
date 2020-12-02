@@ -16,4 +16,4 @@ def calcularConstanteAsintotica (historiaRaiz, cantidadIteraciones, ordenDeConve
     
     return constanteAsintotica
     
-    
+ print ("hola")
