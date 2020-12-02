@@ -5,7 +5,6 @@ import math
 import BusquedaRaicesBiseccion as biseccion
 
 def crearTabla (historiaRaices, convergencia, cteAsintotica):
-
     print("Iteración\t\t\t\tRaiz\t\t\t\t\tError\t\tConvergencia\tCte Asintótica") 
     for i in range(0, len(historiaRaices) - 1):
     

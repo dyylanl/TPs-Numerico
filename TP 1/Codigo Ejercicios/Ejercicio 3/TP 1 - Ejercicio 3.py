@@ -168,7 +168,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("===========================================" + "\n")
     print("El resultado por Secante es: "+ str(resultadoSecante[:3]) + "\n")
 
-    convergenciaSecante = ordenConvergencia.ordenDeConvergencia(resultadoSecante[3], resultadoSecante[2])
+    convergenciaSecante = ordenConvergencia.ordenDeConvergencia(resultadoSecante[3], resultadoSecante[2] + 2)
     #print("Orden de convergencia: \n")
     #print(convergenciaSecante)
 
@@ -180,7 +180,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     plt.title("Orden de convergencia Secante")
     plt.show()
 
-    cteAsintoticaSecante = cteAsintotica.calcularConstanteAsintotica(resultadoSecante[3], resultadoSecante[2], 2)
+    cteAsintoticaSecante = cteAsintotica.calcularConstanteAsintotica(resultadoSecante[3], resultadoSecante[2] + 2, 2)
 
     plt.figure()
     plt.plot(cteAsintoticaSecante[:,0], cteAsintoticaSecante[:,1], '-', lw = 2, label = 'Secante')
