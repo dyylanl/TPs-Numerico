@@ -50,9 +50,16 @@ def graficarFuncionesYDerivadas(mostrarLeyenda = False):
     graficoVolumen.extend(graficoDerivada)
     graficoVolumen.extend(sym.plotting.plot(volumenDelTanqueDeAgua(2*R), (x, 0, 2*R), line_color = 'g', label = "Volumen maximo", legend = mostrarLeyenda))
     graficoVolumen.extend(sym.plotting.plot(0, (x, 0, 2*R), line_color = "Yellow", label = "Derivada Volumen Maximo", legend = mostrarLeyenda))
-
-
     graficoVolumen.show()
+
+    funcionf1 = sym.simplify ( math.pi * R * (x ** 2) - (math.pi * (x ** 3))/3 - 129.74 )
+    funcionf2 = sym.simplify (math.pi * R * (x ** 2) - (math.pi * (x ** 3))/3 - 321.56 )
+    graficof1 = sym.plotting.plot(funcionf1, (x, 0, 2*R), title = "Funcion f1 (x)")
+    graficof2 = sym.plotting.plot(funcionf2, (x, 0, 2*R), title = "Funcion f2 (x)")
+
+    graficof1.show()
+    graficof2.show()
+
 
 
 def funcionParaNewton(x):
@@ -86,7 +93,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     convergenciaBiseccion = ordenConvergencia.ordenDeConvergencia(resultadoBiseccion[3], resultadoBiseccion[2])
     #print("Orden de convergencia: \n")
    # print(convergenciaBiseccion)
-    
+
     plt.figure()
     plt.plot(convergenciaBiseccion[:,0], convergenciaBiseccion[:,1], '-', lw = 2, label = 'Biseccion')
     plt.xlabel("Iteración")
@@ -95,14 +102,14 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     plt.title("Orden de convergencia Bisección")
 
     cteAsintoticaBiseccion = cteAsintotica.calcularConstanteAsintotica(resultadoBiseccion[3], resultadoBiseccion[2], 1)
-    
+
     plt.figure()
     plt.plot(cteAsintoticaBiseccion[:,0], cteAsintoticaBiseccion[:,1], '-', lw = 2, label = 'Biseccion')
     plt.xlabel("Iteración")
     plt.ylabel("Constante Asintótica")
     plt.grid(True)
     plt.title("Constante Asintótica Bisección")
-    
+
     crearTabla.crearTabla(resultadoBiseccion[3], convergenciaBiseccion, cteAsintoticaBiseccion)
     x= sym.Symbol('x')
     y= sym.Symbol('y')
@@ -126,7 +133,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo[:3]) + "\n")
 
     convergenciaPuntoFijo = ordenConvergencia.ordenDeConvergencia(resultadoPuntoFijo[3], resultadoPuntoFijo[2])
-    
+
     plt.figure()
     plt.plot(convergenciaPuntoFijo[:,0], convergenciaPuntoFijo[:,1], '-', lw = 2, label = 'Punto Fijo')
     plt.xlabel("Iteración")
@@ -134,18 +141,18 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     plt.grid(True)
     plt.title("Orden de convergencia Punto Fijo")
     plt.show()
-    
+
     cteAsintoticaPuntoFijo = cteAsintotica.calcularConstanteAsintotica(resultadoPuntoFijo[3], resultadoPuntoFijo[2], 1)
-    
+
     plt.figure()
     plt.plot(cteAsintoticaPuntoFijo[:,0], cteAsintoticaPuntoFijo[:,1], '-', lw = 2, label = 'Punto Fijo')
     plt.xlabel("Iteración")
     plt.ylabel("Constante Asintótica")
     plt.grid(True)
     plt.title("Constante Asintótica Punto Fijo")
-    
+
     crearTabla.crearTabla(resultadoPuntoFijo[3], convergenciaPuntoFijo, cteAsintoticaPuntoFijo)
-    
+
     funcionNewton = sym.simplify((-1* (x**3)) + 3*R*(x**2) - (3 * volumenAHallar/ math.pi))
 
     if (cota == 10**(-5)):
@@ -154,13 +161,13 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     else:
         resultadoSecante = secante.busqueda_raiz_secante(funcionNewton,\
                                                      semillaNewton, semillaAux,  cota)
-        
+
 
     print("===========================================" + "\n")
     print ("\t \t \t SECANTE \n")
     print("===========================================" + "\n")
     print("El resultado por Secante es: "+ str(resultadoSecante[:3]) + "\n")
-    
+
     convergenciaSecante = ordenConvergencia.ordenDeConvergencia(resultadoSecante[3], resultadoSecante[2])
     #print("Orden de convergencia: \n")
     #print(convergenciaSecante)
@@ -181,7 +188,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     plt.ylabel("Constante Asintótica")
     plt.grid(True)
     plt.title("Constante Asintótica Secante")
-    
+
     crearTabla.crearTabla(resultadoSecante[3], convergenciaSecante, cteAsintoticaSecante)
 
     if(cota == 10**(-5)):
@@ -214,9 +221,9 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     plt.ylabel("Constante Asintótica")
     plt.grid(True)
     plt.title("Constante Asintótica Newton")
-    
+
     crearTabla.crearTabla(resultadoNewton[3], convergenciaNewton, cteAsintoticaNewton)
-    
+
     if(cota == 10**(-5)):
         resultadoNewtonMult = newtonMult.busqueda_raiz_newton(funcionNewton, semillaNewton, cota, False, 4)
 
@@ -241,16 +248,16 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     plt.show()
 
     cteAsintoticaNewtonMult = cteAsintotica.calcularConstanteAsintotica(resultadoNewtonMult[3], resultadoNewtonMult[2], 2)
-    
+
     plt.figure()
     plt.plot(cteAsintoticaNewtonMult[:,0], cteAsintoticaNewtonMult[:,1], '-', lw = 2, label = 'Newton Múltiple')
     plt.xlabel("Iteración")
     plt.ylabel("Constante Asintótica")
     plt.grid(True)
     plt.title("Constante Asintótica Newton Múltiple")
-    
+
     crearTabla.crearTabla(resultadoNewtonMult[3], convergenciaNewtonMult, cteAsintoticaNewtonMult)
-    
+
     print("\n")
 
 x= sym.Symbol('x')
@@ -278,6 +285,5 @@ buscarRaicesConDistintosMetodosYCota(10**(-5))
 buscarRaicesConDistintosMetodosYCota(10**(-13))
 
 raizScipy = optimize.brentq(lambda x: (math.pi * x ** 2 * (3 * R - x)) / 3, 1, 15)
-    
-print("f) Raiz encontrada con función de búsqueda de raíces Scipy: " + str(raizScipy))
 
+print("f) Raiz encontrada con función de búsqueda de raíces Scipy: " + str(raizScipy))
