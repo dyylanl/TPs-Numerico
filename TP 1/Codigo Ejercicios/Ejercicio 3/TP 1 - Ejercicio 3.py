@@ -40,6 +40,14 @@ def volumenLlenoAPorcentaje(porcentaje):
   return volumenDelTanqueDeAgua(2*R) * porcentaje
 
 
+def funcionf1ConVolumenAl40PorCiento(x):
+    funcionf1 = sym.simplify ( math.pi * R * (x ** 2) - (math.pi * (x ** 3))/3 - volumenLlenoAPorcentaje(porcentajeDeAguaABuscar()) )
+    return funcionf1
+
+def funcionf2ConVolumenLleno(x):
+    funcionf2 = sym.simplify ( math.pi * R * (x ** 2) - (math.pi * (x ** 3))/3 - volumenLlenoAPorcentaje(1) )
+    return funcionf2
+
 def graficarFuncionesYDerivadas(mostrarLeyenda = False):
 
     funcionVolumenPorcentajeEnSimbolos = sym.simplify((math.pi * (x ** 2)* (3*R-x))/3)
@@ -52,22 +60,14 @@ def graficarFuncionesYDerivadas(mostrarLeyenda = False):
     graficoVolumen.extend(sym.plotting.plot(0, (x, 0, 2*R), line_color = "Yellow", label = "Derivada Volumen Maximo", legend = mostrarLeyenda))
     graficoVolumen.show()
 
-    funcionf1 = sym.simplify ( math.pi * R * (x ** 2) - (math.pi * (x ** 3))/3 - 129.74 )
-    funcionf2 = sym.simplify (math.pi * R * (x ** 2) - (math.pi * (x ** 3))/3 - 321.56 )
+    funcionf1 = funcionf1ConVolumenAl40(x)
+    funcionf2 = funcionf2ConVolumenLleno(x)
     graficof1 = sym.plotting.plot(funcionf1, (x, 0, 2*R), title = "Funcion f1 (x)")
     graficof2 = sym.plotting.plot(funcionf2, (x, 0, 2*R), title = "Funcion f2 (x)")
 
     graficof1.show()
     graficof2.show()
 
-
-
-def funcionParaNewton(x):
-    return
-
-
-def funcionParaNewtonMult(x):
-    return
 
 def funcionParaBiseccion(x):
     funcionAltura = sym.simplify((-1* (h**3)) + 3*R*(h**2) - (3 * volumenAHallar/ math.pi))
@@ -79,7 +79,7 @@ def funcionGParaPuntoFijo(y):
     return (GdeXParaPuntoFijo(y))
 
 def graficar(funcion, Label, xLabel, yLabel, title):
-  
+
     plt.figure()
     plt.plot(funcion[:,0], funcion[:,1], '-', lw = 2, label = Label)
     plt.xlabel(xLabel)
@@ -87,11 +87,10 @@ def graficar(funcion, Label, xLabel, yLabel, title):
     plt.grid(True)
     plt.title(title)
     plt.show()
-   
+
 
 
 def buscarRaicesConDistintosMetodosYCota(cota):
-
 
     print("\n Usando la cota de error: " + str(cota)+ "\n ")
 
@@ -106,7 +105,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     graficar(convergenciaBiseccion,'Biseccion', "Iteracion", "Orden de convergencia", "Orden de convergencia Biseccion")
 
 
-    cteAsintoticaBiseccion = cteAsintotica.calcularConstanteAsintotica(resultadoBiseccion[3], resultadoBiseccion[2], 1)    
+    cteAsintoticaBiseccion = cteAsintotica.calcularConstanteAsintotica(resultadoBiseccion[3], resultadoBiseccion[2], 1)
     graficar(cteAsintoticaBiseccion,'Biseccion', "Iteracion", "Constante Asintotica", "Constante asintotica Biseccion")
 
     crearTabla.crearTabla(resultadoBiseccion[3], convergenciaBiseccion, cteAsintoticaBiseccion)
@@ -157,11 +156,11 @@ def buscarRaicesConDistintosMetodosYCota(cota):
 
     convergenciaSecante = ordenConvergencia.ordenDeConvergencia(resultadoSecante[3], resultadoSecante[2] + 2)
     graficar(convergenciaSecante, 'Secante', "Iteracion", "Orden de convergencia", "Orden de convergencia Secante")
-    
-    
+
+
     cteAsintoticaSecante = cteAsintotica.calcularConstanteAsintotica(resultadoSecante[3], resultadoSecante[2] + 2, 2)
     graficar(cteAsintoticaSecante, 'Secante', "Iteracion", "Constante Asintotica", "Constante Asintotica Secante")
-    
+
 
     crearTabla.crearTabla(resultadoSecante[3], convergenciaSecante, cteAsintoticaSecante)
 
@@ -199,7 +198,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("\nOrden de convergencia: \n")
     print(convergenciaNewtonMult)
     graficar(convergenciaNewtonMult, 'Newtorn Multiple', "Iteracion", "Orden de convergencia", "Orden de convergencia Newton Multiple")
-   
+
     cteAsintoticaNewtonMult = cteAsintotica.calcularConstanteAsintotica(resultadoNewtonMult[3], resultadoNewtonMult[2], 2)
     graficar(cteAsintoticaNewtonMult, 'Newton Multiple', "Iteracion", "Constante Asintotica", "Constante Asintotica Newton Multiple")
 
