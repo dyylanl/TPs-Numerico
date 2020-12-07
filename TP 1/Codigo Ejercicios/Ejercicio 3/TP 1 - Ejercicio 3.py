@@ -78,6 +78,16 @@ def funcionGParaPuntoFijo(y):
     GdeXParaPuntoFijo = lambda x: ( (( (x**3)/(3*R) ) + (volumenAHallar/(R*math.pi) ))**(1/2))
     return (GdeXParaPuntoFijo(y))
 
+
+def funcionParaBiseccionDeF2(x):
+    funcionAltura = sym.simplify((-1* (h**3)) + 3*R*(h**2) - (3 * volumenLlenoAPorcentaje(1)/ math.pi))
+    return funcionAltura.subs(h,x)
+
+
+def funcionGParaPuntoFijoDeF2(y):
+    GdeXParaPuntoFijo = lambda x: ( (( (x**3)/(3*R) ) + (volumenLlenoAPorcentaje(1)/(R*math.pi) ))**(1/2))
+    return (GdeXParaPuntoFijo(y))
+
 def graficar(funcion, Label, xLabel, yLabel, title):
 
     plt.figure()
@@ -90,7 +100,7 @@ def graficar(funcion, Label, xLabel, yLabel, title):
 
 
 
-def buscarRaicesConDistintosMetodosYCota(cota):
+def buscarRaicesConDistintosMetodosYCota(cota, volumenDelTanque):       
 
     print("\n Usando la cota de error: " + str(cota)+ "\n ")
 
@@ -98,7 +108,12 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print ("\t \t \t BISECCION \n")
     print("===========================================" + "\n")
 
-    resultadoBiseccion = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion)
+
+    if (volumenDelTanque == volumenLlenoAPorcentaje(1)):
+        resultadoBiseccion = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccionDeF2)
+    else:
+        resultadoBiseccion = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion)
+        
     print("El resultado por Bisección es: "+ str(resultadoBiseccion[:3]) + "\n")
 
     convergenciaBiseccion = ordenConvergencia.ordenDeConvergencia(resultadoBiseccion[3], resultadoBiseccion[2])
@@ -111,9 +126,16 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     crearTabla.crearTabla(resultadoBiseccion[3], convergenciaBiseccion, cteAsintoticaBiseccion)
     x= sym.Symbol('x')
     y= sym.Symbol('y')
-    semillaPuntoFijo = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 3)[0]
-    semillaNewton = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 5)[0]
-    semillaAux = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 4)[0] # Solo para secante
+    
+    if (volumenDelTanque == volumenLlenoAPorcentaje(1)):
+       semillaPuntoFijo = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccionDeF2, 3)[0]
+       semillaNewton = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccionDeF2, 5)[0]
+       semillaAux = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccionDeF2, 4)[0] # Solo para secante
+
+    else:
+       semillaPuntoFijo = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 3)[0]
+       semillaNewton = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 5)[0]
+       semillaAux = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 4)[0] # Solo para secante
 
 
     print ("\n--------------- SEMILLAS ----------------- \n")
@@ -123,8 +145,13 @@ def buscarRaicesConDistintosMetodosYCota(cota):
     print("Semilla auxiliar elegida con 4 iteraciones de biseccion: "+ str(semillaAux) + "\n")
 
 
-#    GdeXParaPuntoFijo = lambda x: ( (( (x**3)/(3*R) ) + (volumenAHallar/(R*math.pi) ))**(1/2))
-    resultadoPuntoFijo = puntoFijo.busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, funcionGParaPuntoFijo, CANT_MAX_DE_ITERACIONES)
+    if (volumenDelTanque == volumenLlenoAPorcentaje(1)):
+        resultadoPuntoFijo = puntoFijo.busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, funcionGParaPuntoFijoDeF2, CANT_MAX_DE_ITERACIONES)
+    
+    else:
+        resultadoPuntoFijo = puntoFijo.busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, funcionGParaPuntoFijo, CANT_MAX_DE_ITERACIONES)
+    
+    
     print("===========================================" + "\n")
     print ("\t \t \t PUNTO FIJO \n")
     print("===========================================" + "\n")
@@ -139,7 +166,9 @@ def buscarRaicesConDistintosMetodosYCota(cota):
 
     crearTabla.crearTabla(resultadoPuntoFijo[3], convergenciaPuntoFijo, cteAsintoticaPuntoFijo)
 
-    funcionNewton = sym.simplify((-1* (x**3)) + 3*R*(x**2) - (3 * volumenAHallar/ math.pi))
+
+    funcionNewton = sym.simplify((-1* (x**3)) + 3*R*(x**2) - (3 * volumenDelTanque/ math.pi))
+        
 
     if (cota == 10**(-5)):
         resultadoSecante = secante.busqueda_raiz_secante(funcionNewton,\
@@ -206,6 +235,7 @@ def buscarRaicesConDistintosMetodosYCota(cota):
 
     print("\n")
 
+
 x= sym.Symbol('x')
 
 h= sym.Symbol('h')
@@ -220,15 +250,25 @@ volumenAHallar = volumenLlenoAPorcentaje(porcentajePedido)
 funcionAltura = sym.simplify((-1* (h**3)) + 3*R*(h**2) - (3 * volumenAHallar/ math.pi))
 
 
-#graficoAltura = sym.plotting.plot(funcionAltura, (h, 0, 2*R))
-
 print("a) Volumen del tanque lleno al "+ str(porcentajePedido*100) +  "% calculado: " + str(volumenAHallar) + "\n")
 print("b) El volumen total del tanque es: " + str(volumenLlenoAPorcentaje(1)))
 
 print("\nc) \n")
 
-buscarRaicesConDistintosMetodosYCota(10**(-5))
-buscarRaicesConDistintosMetodosYCota(10**(-13))
+print("***************************************************************" + "\n")
+print ("\t \t FUNCION F1: VOLUMEN LLENO APROX. AL 40% \n")
+print("***************************************************************" + "\n")
+buscarRaicesConDistintosMetodosYCota(10**(-5), volumenAHallar)
+buscarRaicesConDistintosMetodosYCota(10**(-13), volumenAHallar)
+
+print("\n\n\n")
+
+print("***************************************************************" + "\n")
+print ("\t \t FUNCION F2: VOLUMEN LLENO AL 100% \n")
+print("***************************************************************" + "\n")
+buscarRaicesConDistintosMetodosYCota(10**(-5), volumenTotalDeAgua)
+buscarRaicesConDistintosMetodosYCota(10**(-13), volumenTotalDeAgua)
+
 
 raizScipy = optimize.brentq(lambda x: (math.pi * x ** 2 * (3 * R - x)) / 3, 1, 15)
 
