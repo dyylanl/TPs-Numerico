@@ -60,7 +60,7 @@ def graficarFuncionesYDerivadas(mostrarLeyenda = False):
     graficoVolumen.extend(sym.plotting.plot(0, (x, 0, 2*R), line_color = "Yellow", label = "Derivada Volumen Maximo", legend = mostrarLeyenda))
     graficoVolumen.show()
 
-    funcionf1 = funcionf1ConVolumenAl40(x)
+    funcionf1 = funcionf1ConVolumenAl40PorCiento(x)
     funcionf2 = funcionf2ConVolumenLleno(x)
     graficof1 = sym.plotting.plot(funcionf1, (x, 0, 2*R), title = "Funcion f1 (x)")
     graficof2 = sym.plotting.plot(funcionf2, (x, 0, 2*R), title = "Funcion f2 (x)")
