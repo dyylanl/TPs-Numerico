@@ -13,7 +13,7 @@ def busqueda_raiz(inicio, fin, epsilon, func, iteraciones = None):
     i = 0
     #print("Iteraciones: " + str(N))
     resultado = busqueda_raiz_rec(inicio, fin, N, func, historia, i)
-    resultado[2] = N
+    resultado[2] = len(resultado[3])
     return resultado
     
 

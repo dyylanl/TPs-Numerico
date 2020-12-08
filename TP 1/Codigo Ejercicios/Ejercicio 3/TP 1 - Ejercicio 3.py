@@ -169,14 +169,14 @@ def buscarRaicesConDistintosMetodosYCota(cota, volumenDelTanque):
 
     funcionNewton = sym.simplify((-1* (x**3)) + 3*R*(x**2) - (3 * volumenDelTanque/ math.pi))
         
-
-    if (cota == 10**(-5)):
+    if (volumenDelTanque == volumenLlenoAPorcentaje(volumenAHallar) and (cota == 10**(-5))):
         resultadoSecante = secante.busqueda_raiz_secante(funcionNewton,\
-                                                     semillaNewton, semillaAux,  cota, False, 4)
+                                                         semillaNewton, semillaAux,  cota, False, 4)
     else:
         resultadoSecante = secante.busqueda_raiz_secante(funcionNewton,\
                                                      semillaNewton, semillaAux,  cota)
-
+        
+       
 
     print("===========================================" + "\n")
     print ("\t \t \t SECANTE \n")
@@ -193,7 +193,7 @@ def buscarRaicesConDistintosMetodosYCota(cota, volumenDelTanque):
 
     crearTabla.crearTabla(resultadoSecante[3], convergenciaSecante, cteAsintoticaSecante)
 
-    if(cota == 10**(-5)):
+    if (volumenDelTanque == volumenLlenoAPorcentaje(volumenAHallar) and (cota == 10**(-5))):
         resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota, False, 4)
     else:
         resultadoNewton = newton.busqueda_raiz_newton(funcionNewton, semillaNewton, cota)
@@ -212,7 +212,7 @@ def buscarRaicesConDistintosMetodosYCota(cota, volumenDelTanque):
 
     crearTabla.crearTabla(resultadoNewton[3], convergenciaNewton, cteAsintoticaNewton)
 
-    if(cota == 10**(-5)):
+    if (volumenDelTanque == volumenLlenoAPorcentaje(volumenAHallar) and (cota == 10**(-5))):
         resultadoNewtonMult = newtonMult.busqueda_raiz_newton(funcionNewton, semillaNewton, cota, False, 4)
 
     else:

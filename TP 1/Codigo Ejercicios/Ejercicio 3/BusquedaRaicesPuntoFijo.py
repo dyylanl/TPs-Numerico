@@ -20,4 +20,5 @@ def busqueda_raiz_punto_fijo(semillaPorBiseccion, cota, funcG, cantMaxIteracione
  #           print("Iteraciones (punto fijo): " + str(iteraciones) + "RAIZ: " + str(dato))
 #    print(f'Raiz: {dato}\nCantidad de iteraciones: {iteraciones}')
     historia[iteraciones - 1] = (iteraciones, dato, abs(dato - dato_viejo) )
+    historia = historia[:iteraciones]
     return (dato, abs(dato - dato_viejo), iteraciones, historia)
