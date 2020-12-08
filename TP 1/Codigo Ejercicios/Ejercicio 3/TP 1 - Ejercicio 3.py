@@ -126,11 +126,11 @@ def buscarRaicesConDistintosMetodosYCota(cota, volumenDelTanque):
     print("El resultado por Bisección es: "+ str(resultadoBiseccion[:3]) + "\n")
 
     convergenciaBiseccion = ordenConvergencia.ordenDeConvergencia(resultadoBiseccion[3], resultadoBiseccion[2])
-    graficar(convergenciaBiseccion,'Biseccion', "Iteracion", "Orden de convergencia", "Orden de convergencia Biseccion")
+    graficar(convergenciaBiseccion[2:-2],'Biseccion', "Iteracion", "Orden de convergencia", "Orden de convergencia Biseccion")
 
 
     cteAsintoticaBiseccion = cteAsintotica.calcularConstanteAsintotica(resultadoBiseccion[3], resultadoBiseccion[2], 1)
-    graficar(cteAsintoticaBiseccion,'Biseccion', "Iteracion", "Constante Asintotica", "Constante asintotica Biseccion")
+    graficar(cteAsintoticaBiseccion[1:-2],'Biseccion', "Iteracion", "Constante Asintotica", "Constante asintotica Biseccion")
 
     crearTabla.crearTabla(resultadoBiseccion[3], convergenciaBiseccion, cteAsintoticaBiseccion)
     x= sym.Symbol('x')
@@ -173,10 +173,10 @@ def buscarRaicesConDistintosMetodosYCota(cota, volumenDelTanque):
     print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo[:3]) + "\n")
 
     convergenciaPuntoFijo = ordenConvergencia.ordenDeConvergencia(resultadoPuntoFijo[3], resultadoPuntoFijo[2] + 1)
-    graficar(convergenciaPuntoFijo, 'Punto Fijo', "Iteracion", "Orden de convergencia", "Orden de convergencia Punto Fijo")
+    graficar(convergenciaPuntoFijo[2:-2], 'Punto Fijo', "Iteracion", "Orden de convergencia", "Orden de convergencia Punto Fijo")
 
     cteAsintoticaPuntoFijo = cteAsintotica.calcularConstanteAsintotica(resultadoPuntoFijo[3], resultadoPuntoFijo[2] + 1, 1)
-    graficar(cteAsintoticaPuntoFijo, 'Punto Fijo', "Iteracion", "Constante Asintotica", "Constante Asintotica Punto Fijo")
+    graficar(cteAsintoticaPuntoFijo[1:-2], 'Punto Fijo', "Iteracion", "Constante Asintotica", "Constante Asintotica Punto Fijo")
 
     crearTabla.crearTabla(resultadoPuntoFijo[3], convergenciaPuntoFijo, cteAsintoticaPuntoFijo)
 
@@ -198,11 +198,10 @@ def buscarRaicesConDistintosMetodosYCota(cota, volumenDelTanque):
     print("El resultado por Secante es: "+ str(resultadoSecante[:3]) + "\n")
 
     convergenciaSecante = ordenConvergencia.ordenDeConvergencia(resultadoSecante[3], resultadoSecante[2] + 2)
-    graficar(convergenciaSecante, 'Secante', "Iteracion", "Orden de convergencia", "Orden de convergencia Secante")
+    graficar(convergenciaSecante[2:-2], 'Secante', "Iteracion", "Orden de convergencia", "Orden de convegencia Secante")
 
-
-    cteAsintoticaSecante = cteAsintotica.calcularConstanteAsintotica(resultadoSecante[3], resultadoSecante[2] + 2, 2)
-    graficar(cteAsintoticaSecante, 'Secante', "Iteracion", "Constante Asintotica", "Constante Asintotica Secante")
+    cteAsintoticaSecante = cteAsintotica.calcularConstanteAsintotica(resultadoSecante[3], resultadoSecante[2] + 2, 1)
+    graficar(cteAsintoticaSecante[1:-2], 'Secante', "Iteracion", "Constante Asintotica", "Constante Asintotica Secante")
 
 
     crearTabla.crearTabla(resultadoSecante[3], convergenciaSecante, cteAsintoticaSecante)
@@ -218,11 +217,11 @@ def buscarRaicesConDistintosMetodosYCota(cota, volumenDelTanque):
     print("El resultado por Newton es: "+ str(resultadoNewton[:3]) + "\n")
 
     convergenciaNewton = ordenConvergencia.ordenDeConvergencia(resultadoNewton[3], resultadoNewton[2] + 1)
-    graficar(convergenciaNewton, 'Newton', "Iteracion", "Orden de convergencia", "Orden de convergencia Newton")
+    graficar(convergenciaNewton[2:-2], 'Newton', "Iteracion", "Orden de convergencia", "Orden de convergencia Newton")
 
 
     cteAsintoticaNewton = cteAsintotica.calcularConstanteAsintotica(resultadoNewton[3], resultadoNewton[2] + 1, 2)
-    graficar(cteAsintoticaNewton, 'Newton', "Iteracion", "Constante Asintotica", "Constante Asintotica Newton")
+    graficar(cteAsintoticaNewton[1:-2], 'Newton', "Iteracion", "Constante Asintotica", "Constante Asintotica Newton")
 
     crearTabla.crearTabla(resultadoNewton[3], convergenciaNewton, cteAsintoticaNewton)
 
@@ -239,10 +238,10 @@ def buscarRaicesConDistintosMetodosYCota(cota, volumenDelTanque):
 
     convergenciaNewtonMult = ordenConvergencia.ordenDeConvergencia(resultadoNewtonMult[3], resultadoNewtonMult[2] + 1)
 
-    graficar(convergenciaNewtonMult, 'Newtorn Multiple', "Iteracion", "Orden de convergencia", "Orden de convergencia Newton Multiple")
+    graficar(convergenciaNewtonMult[2:-2], 'Newtorn Multiple', "Iteracion", "Orden de convergencia", "Orden de convergencia Newton Multiple")
 
     cteAsintoticaNewtonMult = cteAsintotica.calcularConstanteAsintotica(resultadoNewtonMult[3], resultadoNewtonMult[2] + 1, 2)
-    graficar(cteAsintoticaNewtonMult, 'Newton Multiple', "Iteracion", "Constante Asintotica", "Constante Asintotica Newton Multiple")
+    graficar(cteAsintoticaNewtonMult[1:-2], 'Newton Multiple', "Iteracion", "Constante Asintotica", "Constante Asintotica Newton Multiple")
 
     crearTabla.crearTabla(resultadoNewtonMult[3], convergenciaNewtonMult, cteAsintoticaNewtonMult)
 
