@@ -2,7 +2,7 @@ import numpy as np
 
 def calcularConstanteAsintotica (historiaRaiz, cantidadIteraciones, ordenDeConvergencia):
     
-    constanteAsintotica = np.zeros((cantidadIteraciones - 1, 2))
+    constanteAsintotica = np.zeros((cantidadIteraciones + 1, 2))
     n = 1
     
     while (n < cantidadIteraciones - 1):
