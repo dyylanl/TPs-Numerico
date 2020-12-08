@@ -162,16 +162,19 @@ def buscarRaicesConDistintosMetodosYCota(cota, volumenDelTanque):
     print("Semilla auxiliar elegida con " + str(iteracionesSemillaAux) +" iteraciones de biseccion: "+ str(semillaAux) + "\n")
 
 
+    
+    print("===========================================" + "\n")
+    print ("\t \t \t PUNTO FIJO \n")
+    print("===========================================" + "\n")
+    
     if (volumenDelTanque == volumenLlenoAPorcentaje(1)):
         resultadoPuntoFijo = puntoFijo.busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, funcionGParaPuntoFijoDeF2, CANT_MAX_DE_ITERACIONES)
     
     else:
         resultadoPuntoFijo = puntoFijo.busqueda_raiz_punto_fijo(semillaPuntoFijo, cota, funcionGParaPuntoFijo, CANT_MAX_DE_ITERACIONES)
     
+ 
     
-    print("===========================================" + "\n")
-    print ("\t \t \t PUNTO FIJO \n")
-    print("===========================================" + "\n")
     print("El resultado por Punto Fijo es: "+ str(resultadoPuntoFijo[:3]) + "\n")
 
     convergenciaPuntoFijo = ordenConvergencia.ordenDeConvergencia(resultadoPuntoFijo[3], resultadoPuntoFijo[2] + 1)
@@ -272,8 +275,8 @@ print("\nc) \n")
 print("***************************************************************" + "\n")
 print ("\t \t FUNCION F1: VOLUMEN LLENO APROX. AL 40% \n")
 print("***************************************************************" + "\n")
-#buscarRaicesConDistintosMetodosYCota(10**(-5), volumenAHallar)
-#buscarRaicesConDistintosMetodosYCota(10**(-13), volumenAHallar)
+buscarRaicesConDistintosMetodosYCota(10**(-5), volumenAHallar)
+buscarRaicesConDistintosMetodosYCota(10**(-13), volumenAHallar)
 
 print("\n\n\n")
 
