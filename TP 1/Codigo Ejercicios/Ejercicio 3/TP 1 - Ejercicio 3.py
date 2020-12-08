@@ -139,9 +139,11 @@ def buscarRaicesConDistintosMetodosYCota(cota, volumenDelTanque):
     iteracionesSemillaPuntoFijo = 3
     iteracionesSemillaNewton = 5
     iteracionesSemillaAux = 4
+    
     if (volumenDelTanque == volumenLlenoAPorcentaje(1)):
         
-       iteracionesSemillaPuntoFijo = 10
+       if(cota == 1e-13):
+           iteracionesSemillaPuntoFijo = 10
        
        semillaPuntoFijo = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccionDeF2, iteracionesSemillaPuntoFijo)[0]
        semillaNewton = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccionDeF2, iteracionesSemillaNewton)[0]
@@ -270,8 +272,8 @@ print("\nc) \n")
 print("***************************************************************" + "\n")
 print ("\t \t FUNCION F1: VOLUMEN LLENO APROX. AL 40% \n")
 print("***************************************************************" + "\n")
-buscarRaicesConDistintosMetodosYCota(10**(-5), volumenAHallar)
-buscarRaicesConDistintosMetodosYCota(10**(-13), volumenAHallar)
+#buscarRaicesConDistintosMetodosYCota(10**(-5), volumenAHallar)
+#buscarRaicesConDistintosMetodosYCota(10**(-13), volumenAHallar)
 
 print("\n\n\n")
 
