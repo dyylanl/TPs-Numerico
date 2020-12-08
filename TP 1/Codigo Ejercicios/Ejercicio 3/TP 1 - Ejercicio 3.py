@@ -127,22 +127,28 @@ def buscarRaicesConDistintosMetodosYCota(cota, volumenDelTanque):
     x= sym.Symbol('x')
     y= sym.Symbol('y')
     
+    iteracionesSemillaPuntoFijo = 3
+    iteracionesSemillaNewton = 5
+    iteracionesSemillaAux = 4
     if (volumenDelTanque == volumenLlenoAPorcentaje(1)):
-       semillaPuntoFijo = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccionDeF2, 3)[0]
-       semillaNewton = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccionDeF2, 5)[0]
-       semillaAux = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccionDeF2, 4)[0] # Solo para secante
+        
+       iteracionesSemillaPuntoFijo = 10
+       
+       semillaPuntoFijo = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccionDeF2, iteracionesSemillaPuntoFijo)[0]
+       semillaNewton = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccionDeF2, iteracionesSemillaNewton)[0]
+       semillaAux = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccionDeF2, iteracionesSemillaAux)[0] # Solo para secante
 
     else:
-       semillaPuntoFijo = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 3)[0]
-       semillaNewton = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 5)[0]
-       semillaAux = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, 4)[0] # Solo para secante
+       semillaPuntoFijo = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, iteracionesSemillaPuntoFijo)[0]
+       semillaNewton = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, iteracionesSemillaNewton)[0]
+       semillaAux = biseccion.busqueda_raiz(0, 2*R,cota, funcionParaBiseccion, iteracionesSemillaAux)[0] # Solo para secante
 
 
     print ("\n--------------- SEMILLAS ----------------- \n")
 
-    print("Semilla elegida con 3 iteraciones de biseccion: "+ str(semillaPuntoFijo))
-    print("Semilla elegida con 5 iteraciones de biseccion: "+ str(semillaNewton))
-    print("Semilla auxiliar elegida con 4 iteraciones de biseccion: "+ str(semillaAux) + "\n")
+    print("Semilla elegida con " + str(iteracionesSemillaPuntoFijo) +" iteraciones de biseccion: "+ str(semillaPuntoFijo))
+    print("Semilla elegida con " + str(iteracionesSemillaNewton) +" iteraciones de biseccion: "+ str(semillaNewton))
+    print("Semilla auxiliar elegida con " + str(iteracionesSemillaAux) +" iteraciones de biseccion: "+ str(semillaAux) + "\n")
 
 
     if (volumenDelTanque == volumenLlenoAPorcentaje(1)):
@@ -224,8 +230,7 @@ def buscarRaicesConDistintosMetodosYCota(cota, volumenDelTanque):
     print("El resultado por Newton Mult es: "+ str(resultadoNewtonMult[:3]))
 
     convergenciaNewtonMult = ordenConvergencia.ordenDeConvergencia(resultadoNewtonMult[3], resultadoNewtonMult[2])
-    print("\nOrden de convergencia: \n")
-    print(convergenciaNewtonMult)
+
     graficar(convergenciaNewtonMult, 'Newtorn Multiple', "Iteracion", "Orden de convergencia", "Orden de convergencia Newton Multiple")
 
     cteAsintoticaNewtonMult = cteAsintotica.calcularConstanteAsintotica(resultadoNewtonMult[3], resultadoNewtonMult[2], 2)
