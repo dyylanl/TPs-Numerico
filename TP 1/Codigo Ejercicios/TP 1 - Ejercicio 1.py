@@ -49,6 +49,6 @@ def intentarEncontrarClave(veces):
 
 
 
-cantidadDeExperimentos = 100000
+cantidadDeExperimentos = 10000
 intentos = intentarEncontrarClave(cantidadDeExperimentos)
 graficarHistograma(intentos)
